@@ -14,52 +14,52 @@ selectedContent = ""
 
 
 entryDate[0] = "1"
-entryContent[0] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[0] = "aaaaa"
 
 entryDate[1] = " 2"
-entryContent[1] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[1] = "bbbbbbbbbb"
 
 entryDate[2] = " 3"
-entryContent[2] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[2] = "cccccccccc"
 
 entryDate[3] = " 4"
-entryContent[3] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[3] = "ddddddddd"
 
 entryDate[4] = " 5"
-entryContent[4] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[4] = "eeeeeeeee"
 
 entryDate[5] = " 6"
-entryContent[5] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[5] = "ffffffffff"
 
 entryDate[6] = " 76"
-entryContent[6] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[6] = "ggggggg"
 
 entryDate[7] = " 8"
-entryContent[7] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[7] = "hhhhhhhh"
 
 entryDate[8] = " 9"
-entryContent[8] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[8] = "iiiiiiii"
 
 entryDate[9] = " 0"
-entryContent[9] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[9] = "jjjjjjjjjj"
 
 entryDate[10] = " random"
-entryContent[10] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[10] = "kkkkkkkkkkk"
 
 entryDate[11] = " random"
-entryContent[11] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[11] = "lllllll"
 
 entryDate[12] = " random"
-entryContent[12] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[12] = "mmmmmmmm"
 
 entryDate[13] = " random"
-entryContent[13] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[13] = "nnnnnnnn"
 
 entryDate[14] = " random"
-entryContent[14] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[14] = "oooooooo"
 
 entryDate[15] = " random"
-entryContent[15] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqDl66Gws2Q1eQhIlCV3/view?usp=sharing\"> Space </a>"
+entryContent[15] = "ppppppppp"
 
 
 
@@ -71,5 +71,5 @@ entryContent[15] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqD
   else randomNumber %= varLength
   selectedContent = entryContent[randomNumber]
 
-document.write ("Hello")
+
 document.write (selectedContent)
