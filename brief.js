@@ -71,5 +71,5 @@ entryContent[15] = "<a href = \"https://drive.google.com/file/d/1kYolMF_V8bmpzqD
   else randomNumber %= varLength
   selectedContent = entryContent[randomNumber]
 
-
+document.write ("Hello")
 document.write (selectedContent)
