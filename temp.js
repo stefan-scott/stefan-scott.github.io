@@ -11,9 +11,7 @@
 
 selectedContent = ""
 
-varLength = 16
-var entryDate = new Array(varLength)
-var entryContent = new Array(varLength)
+
 
 entryDate[0] = "1"
 entryContent[0] = "aaaaa"
@@ -74,4 +72,5 @@ entryContent[15] = "ppppppppp"
   selectedContent = entryContent[randomNumber]
 
 document.write("hello")
+document.write(randomNumber)
 document.write (selectedContent)
