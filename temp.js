@@ -20,52 +20,52 @@ var entryDate = new Array(varLength)
 var entryContent = new Array(varLength)
 
 entryDate[0] = "1"
-entryContent[0] = ""
+entryContent[0] = "aaaaa"
 
 entryDate[1] = " 2"
-entryContent[1] = ""
+entryContent[1] = "bbbbbbbbbb"
 
 entryDate[2] = " 3"
-entryContent[2] = ""
+entryContent[2] = "cccccccccc"
 
 entryDate[3] = " 4"
-entryContent[3] = ""
+entryContent[3] = "ddddddddd"
 
 entryDate[4] = " 5"
-entryContent[4] = ""
+entryContent[4] = "eeeeeeeee"
 
 entryDate[5] = " 6"
-entryContent[5] = ""
+entryContent[5] = "ffffffffff"
 
 entryDate[6] = " 76"
-entryContent[6] = ""
+entryContent[6] = "ggggggg"
 
 entryDate[7] = " 8"
-entryContent[7] = ""
+entryContent[7] = "hhhhhhhh"
 
 entryDate[8] = " 9"
-entryContent[8] = ""
+entryContent[8] = "iiiiiiii"
 
 entryDate[9] = " 0"
-entryContent[9] = ""
+entryContent[9] = "jjjjjjjjjj"
 
 entryDate[10] = " random"
-entryContent[10] = ""
+entryContent[10] = "kkkkkkkkkkk"
 
 entryDate[11] = " random"
-entryContent[11] = ""
+entryContent[11] = "lllllll"
 
 entryDate[12] = " random"
-entryContent[12] = ""
+entryContent[12] = "mmmmmmmm"
 
 entryDate[13] = " random"
-entryContent[13] = ""
+entryContent[13] = "nnnnnnnn"
 
 entryDate[14] = " random"
-entryContent[14] = ""
+entryContent[14] = "oooooooo"
 
 entryDate[15] = " random"
-entryContent[15] = ""
+entryContent[15] = "ppppppppp"
 
 if (typeof display == "undefined") { var display = "date" }
 
