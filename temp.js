@@ -8,11 +8,7 @@
 // **                                                                                **
 // ************************************************************************************
 
-today = new Date()
-month = today.getMonth() + 1
-year = today.getFullYear()
 
-selectedDate = new Date("01/01/1900")
 selectedContent = ""
 
 varLength = 16
@@ -67,29 +63,15 @@ entryContent[14] = "oooooooo"
 entryDate[15] = " random"
 entryContent[15] = "ppppppppp"
 
-if (typeof display == "undefined") { var display = "date" }
 
-if (display == "random")
-{
+
+
   var randomNumber = Math.random()
   randomNumber *= varLength
   randomNumber = parseInt(randomNumber)
   if(isNaN(randomNumber)) randomNumber = 0
   else randomNumber %= varLength
   selectedContent = entryContent[randomNumber]
-}
-else
-{
-  for (x=0; x<(entryContent.length); x++)
-  {
-    tempDate = new Date(entryDate[x])
-    tempContent = entryContent[x]
-    if ((tempDate <= today) && (tempDate > selectedDate))
-    {
-      selectedContent = tempContent
-      selectDate = tempDate
-    }
-  }
-}
+
 
 document.write (selectedContent)
