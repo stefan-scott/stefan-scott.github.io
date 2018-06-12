@@ -71,5 +71,5 @@ entryContent[15] = "ppppppppp"
   else randomNumber %= varLength
   selectedContent = entryContent[randomNumber]
 
-
+document.write ("hello")
 document.write (selectedContent)
