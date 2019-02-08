@@ -23,3 +23,6 @@ function draw() {
   x += xSpeed;
   if (x > windowWidth) x = -30;
 }
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
