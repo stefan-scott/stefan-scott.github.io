@@ -35,7 +35,7 @@ function draw() {
   fill(random(255),random(255),random(255));
   for(let i = 0; i < images.length; i++){
     print(images[i]);
-    image(img, images[i][0], images[i][1], 200, 200);
+    image(img, images[i][0], images[i][1], images[i][2], images[i][2]);
   }
   image(img, mouseX,mouseY,imgSize, imgSize);
 
@@ -44,7 +44,7 @@ function draw() {
 function mousePressed(){
   xSpeed = random(-3,3);
   ySpeed = random(-5,5);
-  let loc = [mouseX, mouseY];
+  let loc = [mouseX, mouseY, imgSize];
   images.push(loc);
   
 }
