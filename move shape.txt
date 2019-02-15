@@ -1,0 +1,35 @@
+let x = 200;
+let y = 200;
+let rWidth = 50;
+let rHeight = 50;
+let pickedUp = false;
+
+function setup() {
+  createCanvas(400, 400);
+	rectMode(CENTER);
+}
+
+function draw() {
+  background(220);
+	if (pickedUp) {
+		fill(255,0,0);
+		x = mouseX;
+		y = mouseY;
+	}
+	else fill(200,0,0);
+	rect(x,y,rWidth,rHeight);
+	print(x,y,pickedUp, mouseX, mouseY);
+}
+
+function mousePressed(){
+	if (mouseX >= x-rWidth/2 && mouseX <= x+rWidth/2){
+		print("yyt");
+		if (mouseY >= y-rHeight/2 && mouseY <= y+rHeight/2){
+			pickedUp = true;
+		}
+	}
+}
+
+function mouseReleased(){
+	pickedUp = false;
+}
