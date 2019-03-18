@@ -20,8 +20,6 @@ function drawTerrain(){
   //do all the work to draw terrain 1 frame
   
   let xOff = start;
-  let xOff2 = start2;
-  let xOff3 = start3;
   let highest = height;
   let highestX = 0;
   for (let x = 0; x < width; x += tWidth){
@@ -29,21 +27,10 @@ function drawTerrain(){
     stroke(0);
     rect(x, curHeight, x + tWidth, height);
 
-    curHeight = noise(xOff2)*height*0.8;
-    stroke(200,100,70);
-    rect(x, curHeight, x + tWidth, height);
-
-    curHeight = noise(xOff3)*height;
-    stroke(100,240,180);
-    rect(x, curHeight, x + tWidth, height);
     xOff += 0.01;
-    xOff2 += 0.01;
-    xOff3 += 0.01;
     
   }
   start += 0.01;
-  start2 += 0.02;
-  start3 += 0.04;
   
 
 }
