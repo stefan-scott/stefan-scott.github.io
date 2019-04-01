@@ -15,8 +15,6 @@ function determineQuadrant(){
 	}
 }
 
-
-
 function draw() {
   background(220);
 	determineQuadrant();
