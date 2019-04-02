@@ -1,5 +1,5 @@
 let walkers = [];
-const NUM_WALKERS = 400;
+const NUM_WALKERS = 2400;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   for (let i = 0; i < NUM_WALKERS; i++){
@@ -9,6 +9,10 @@ function setup() {
 
 function draw() {
   //background(220);
+  rectMode(CORNER);
+  fill(255,15);
+  rect(0,0,width,height);
+
   for (let i = 0; i < NUM_WALKERS; i++){
     if(walkers[i].movementType===0){
           walkers[i].movePerlin();
