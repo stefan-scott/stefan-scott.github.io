@@ -24,6 +24,15 @@ class Mover{
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
     this.velocity.limit(5);
+    this.edges();
+  }
+
+  edges(){
+    if(this.position.x < 0)this.position.x = width;
+    if(this.position.x > width)this.position.x = 0;
+
+    if(this.position.y < 0)this.position.y = height;
+    if(this.position.y > height)this.position.y = 0;
   }
 
   display(){
