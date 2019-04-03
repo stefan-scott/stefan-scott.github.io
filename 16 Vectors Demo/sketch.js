@@ -14,10 +14,11 @@ function draw() {
 class Mover{
   //constructor and properties
   constructor(x_, y_){
-    this.size = 10;
+    this.size = 2;
     this.position = createVector(x_, y_);
     this.velocity = createVector(0,0);
     this.acceleration = createVector(0,0);
+    this.color = color(random(200,random(200),random(90),30));
   }
   move(){
     this.acceleration = p5.Vector.random2D().mult(2);
@@ -36,6 +37,7 @@ class Mover{
   }
 
   display(){
+    fill(this.color);
     ellipseMode(CENTER);
     push();
     translate(this.position.x, this.position.y);
