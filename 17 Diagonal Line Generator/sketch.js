@@ -1,23 +1,22 @@
-// Diagonal Line Generator
-const spacing = 50;
+// Cubic Disarray Reproduction
+const squareSize = 30;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  strokeWeight(2);
+  rectMode(CENTER);
 }
 
-function diagonalAscending(x, y, s){
-  line(x-s/2, y+s/2, x+s/2, y-s/2);
-}
-
-function diagonalDescending(x,y,s){
-  line(x-s/2, y-s/2, x+s/2, y+s/2);
+function drawRectangles(){
+  for (let x = squareSize/2; x < width-squareSize/2; x+=squareSize){
+    for (let y=squareSize/2; y <height-squareSize/2; y+=squareSize){
+      rect(x,y,squareSize,squareSize);
+    }
+  }
 }
 
 function draw() {
   background(220);
-  for (let x = spacing/2; x < width - spacing/2; x+= spacing){
-    for (let y = spacing/2; y < height - spacing/2; y+=spacing){
-      diagonalDescending(x,y, spacing );
-    }
-  }
+  drawRectangles();
+
 }
