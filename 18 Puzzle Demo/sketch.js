@@ -2,6 +2,7 @@
 const NUM_ROWS = 4;
 const NUM_COLS = 5;
 let rectWidth, rectHeight;
+let currentRow, currentCol;
 
 let gridData = [[0,0,0,255,0],
                 [255,0,255,0,255],
@@ -25,7 +26,16 @@ function drawGrid(){
   }
 }
 
+function determineActiveSquare(){
+  //An expression to run each frame and to determine
+  //where the mouse is!
+  currentRow = int(mouseY / rectHeight);
+  currentCol = int(mouseX / rectWidth);
+  print(currentCol, currentRow);
+}
+
 function draw() {
   background(220);
+  determineActiveSquare();
   drawGrid();
 }
