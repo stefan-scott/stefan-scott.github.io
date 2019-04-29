@@ -33,6 +33,25 @@ function determineActiveSquare(){
   currentCol = int(mouseX / rectWidth);
   print(currentCol, currentRow);
 }
+function mousePressed(){
+
+  flip(currentCol, currentRow );//mouse
+  flip(currentCol-1, currentRow );//left
+  flip(currentCol+1, currentRow );//right
+  flip(currentCol, currentRow-1 );//up
+  flip(currentCol, currentRow+1 );//down
+}
+
+function flip(col, row){
+  if (col >= 0 && col < NUM_COLS && row >= 0 && row < NUM_ROWS){
+    if (gridData[row][col] === 0){
+      gridData[row][col] = 255;
+    }
+    else{ 
+      gridData[row][col] = 0;
+    }
+  }
+}
 
 function draw() {
   background(220);
