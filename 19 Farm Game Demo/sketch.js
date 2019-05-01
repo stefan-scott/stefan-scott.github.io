@@ -1,6 +1,7 @@
 //  Farm Game
 const COLUMNS = 5;
 const ROWS = 5;
+const TILE_SIZE = 100;
 let playerX = 3;
 let playerY = 4;
 
@@ -21,11 +22,19 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(COLUMNS * TILE_SIZE, ROWS * TILE_SIZE);
 }
 
-
+function renderGame(){
+  for (let y = 0; y < ROWS; y++){
+    for (let x = 0; x < COLUMNS; x++){
+      let index = level[y][x];
+      image(tiles[index], x*TILE_SIZE, y*TILE_SIZE);
+    }
+  }
+}
 
 function draw() {
   background(220);
+  renderGame();
 }
