@@ -34,6 +34,63 @@ function renderGame(){
   }
 }
 
+function swap(x1, y1, x2, y2 ){
+  //Simple manipulation of the gameboard state - switch 2 adjacent items
+  let temp = level[y1][x1];
+  level[y1][x1] = level[y2][x2];
+  level[y2][x2] = temp;
+}
+
+function keyPressed(){
+  if (keyCode === LEFT_ARROW){
+    if (playerX > 1){
+      if (level[playerY][playerX-1]===0){//empty beside us
+        swap(playerX, playerY, playerX-1,playerY );
+      }
+      else if(level[playerY][playerX-1]===1){//chicken there
+        if (level[playerY][playerX-2]===0){
+          swap(playerX-1,playerY, playerX-2,playerY);
+          swap(playerX,playerY, playerX-1, playerY );
+        }
+      }
+      }
+    
+    playerX--;
+  }
+  if (keyCode === RIGHT_ARROW){
+    swap(playerX, playerY, playerX+1,playerY );
+    playerX++;
+  }
+  if (keyCode === UP_ARROW){
+    swap(playerX, playerY, playerX, playerY-1 );
+    playerY--;
+  }
+  if (keyCode === DOWN_ARROW){
+    swap(playerX, playerY, playerX, playerY+1 );
+    playerY++;
+  }
+  
+}
+
+// function keyPressed(){
+//   if (keyCode === LEFT_ARROW){
+//     swap(playerX, playerY, playerX-1,playerY );
+//     playerX--;
+//   }
+//   if (keyCode === RIGHT_ARROW){
+//     swap(playerX, playerY, playerX+1,playerY );
+//     playerX++;
+//   }
+//   if (keyCode === UP_ARROW){
+//     swap(playerX, playerY, playerX, playerY-1 );
+//     playerY--;
+//   }
+//   if (keyCode === DOWN_ARROW){
+//     swap(playerX, playerY, playerX, playerY+1 );
+//     playerY++;
+//   }
+// }
+
 function draw() {
   background(220);
   renderGame();
