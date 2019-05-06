@@ -1,10 +1,39 @@
 //selection sort
 
-let values = [30, 20, 0, 6, 29];
+let values = [];
+const ARRAY_SIZE = 1000;
 
 function setup() {
   noCanvas();
   noLoop();
+  populateArray();
+}
+
+function populateArray(){
+  //fill our array with 1000 random numbers from 1-1000
+  for (let i = 0; i< ARRAY_SIZE; i++){
+    values.push(int(random(1000)));
+  }
+}
+
+function binarySearch(n){
+  while (values.length > 1){
+    let index = int(values.length/2);
+    if (values[index]===n){
+      return true;
+    }
+    else{
+      if (values[index]>n){
+        //get rid of the larger numbers
+        values.splice(n);
+      }
+      else{
+        //get rid of the smaller numbers
+        values.splice(0,int(values.length/2));
+      }
+    }
+  }
+  return false;
 }
 
 function selectionSort(){
@@ -31,4 +60,5 @@ function draw() {
   print(values);
   selectionSort();
   print(values);
+  print(binarySearch(52));
 }
