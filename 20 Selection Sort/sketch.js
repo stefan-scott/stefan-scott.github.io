@@ -61,4 +61,5 @@ function draw() {
   selectionSort();
   print(values);
   print(binarySearch(52));
+  print(binarySearch(9999));
 }
