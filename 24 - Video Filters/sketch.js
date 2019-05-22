@@ -1,4 +1,5 @@
 let video;
+const GRID_SPACING = 20;
 
 function setup(){
   createCanvas(640,480);
@@ -16,9 +17,7 @@ function setPixelColor(pos, r, g, b){
   pixels[pos+2] = b;
 }
 
-function draw(){
-  background(220);
-  video.loadPixels();
+function popArt(){
   for (let i = 0; i< pixels.length; i+=4){
     if (avgPixel(i) > 200){
       setPixelColor(i, 200,255,255);
@@ -33,6 +32,37 @@ function draw(){
       setPixelColor(i, 40 , 0, 10);
     }
   }
-  video.updatePixels();
-  image(video,0,0);
 }
+
+function draw(){
+  background(0);
+  video.loadPixels();
+  for (let x = 0; x < video.width; x += GRID_SPACING ){
+    for (let y = 0; y < video.height; y+= GRID_SPACING){
+      let location = (x + y*video.width) * 4;
+      let avg = avgPixel(location);
+
+      drawCharacter(x , y, avg);
+    }
+  }
+  video.updatePixels();
+  //image(video,0,0);
+}
+
+function drawCharacter(x , y, avg){
+  textSize(GRID_SPACING);
+  fill(255);
+  noStroke();
+  if (avg > 200){
+    text("X", x, y);
+  }
+  else if(avg > 100){
+    text ("l", x, y);
+  }
+  else if (avg > 40){
+    text (".", x, y);
+  }
+
+
+}
+
