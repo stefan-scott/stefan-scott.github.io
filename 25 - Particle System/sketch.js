@@ -3,10 +3,11 @@ let pArray = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  noStroke();
 }
 
 function draw() {
-  background(220);
+  background(0);
   pArray.push(new Particle(mouseX, mouseY));
   for (let i = 0; i < pArray.length; i++){
     pArray[i].move();
@@ -23,10 +24,11 @@ function mouseClicked(){
 }
 
 class Particle{
+
   constructor(x_, y_){
     this.x = x_;
     this.y = y_;
-    this.c = color(random(255),random(255),random(255));
+    this.c = color(map(x_,0, width,0,255),map(y_,0, height,0,255),map(x_,0, width,255,0));
     this.size = random(10,20);
     this.ySpeed = random(-2,1);
     this.xSpeed = random(-1,1);
