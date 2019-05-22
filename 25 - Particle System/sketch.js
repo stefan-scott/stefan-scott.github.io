@@ -33,6 +33,7 @@ class Particle{
     this.ySpeed = random(-2,1);
     this.xSpeed = random(-1,1);
     this.lifetime = int(random(80,160));
+    this.maxLifetime = this.lifetime;
     this.GRAV = 0.1;
   }
 
@@ -59,7 +60,11 @@ class Particle{
   display(){
     ellipseMode(CENTER);
     fill(this.c);
-    ellipse(this.x,this.y,this.size,this.size);
+    push();
+    translate(this.x,this.y);
+    scale(map(this.lifetime,0,this.maxLifetime,0,1));
+    ellipse(0,0,this.size,this.size);
+    pop();
   }
 
 }
