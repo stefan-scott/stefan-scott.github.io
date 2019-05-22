@@ -27,16 +27,26 @@ class Particle{
     this.x = x_;
     this.y = y_;
     this.c = color(random(255),random(255),random(255));
-    this.size = random(10,30);
-    this.ySpeed = random(-1,1);
+    this.size = random(10,20);
+    this.ySpeed = random(-2,1);
     this.xSpeed = random(-1,1);
-    this.lifetime = int(random(40,100));
+    this.lifetime = int(random(80,160));
+    this.GRAV = 0.1;
   }
 
   move(){
     this.lifetime -= 1;
+    this.ySpeed += this.GRAV;
     this.x += this.xSpeed;
     this.y += this.ySpeed;
+    this.floorCollision();
+  }
+
+  floorCollision(){
+    if(this.y > height){
+      this.y = height;
+      this.ySpeed *= -1;
+    }
   }
 
   isAlive(){
