@@ -37,12 +37,16 @@ let brightnessSlider;
 let newFrameButton = false;
 let removeFrameButton = false;
 
+let authorID;   //a random ID number to better facilitate merging ino files later on; should allow the array names to not overlap, 
+                //unless we are particularly unlucky.
+
 function setup() {
   const c = createCanvas(windowWidth, windowHeight);
   PIXEL_SIZE = width * .03;    //commmit 48% of screen width to image
   paletteX = PIXEL_SIZE * 16.5;
   paletteY = 0;
   stroke(255);
+  authorID = int(random(5000));
 
   for (let i = 0; i < NUM_FRAMES; i++) {
     animFrames.push(new Frame);
@@ -156,51 +160,64 @@ function windowResized() {
 }
 
 function keyPressed() {  //not mixing key and keyCode, as I believe both will have 
-  if (keyCode === 65) {  //a        some contents regardless of what was pressed most recently
-    if (currentFrame > 0) currentFrame--;
+
+  if (playback) {
+    if (keyCode === 32) { //space
+      playback = !playback;
+    }
+    else if (keyCode === 87) { //W   - increase animation speed
+      print("W");
+      if (animationSpeed > 5) animationSpeed -= 3;
+    }
+    else if (keyCode === 83) { //S
+      if (animationSpeed < 60) animationSpeed += 3;
+    }
   }
-  else if (keyCode === 68) { //d
-    if (currentFrame < NUM_FRAMES - 1) currentFrame++;
-  }
-  else if (keyCode === 32) { //space
-    playback = !playback;
-  }
-  else if (keyCode === 87) { //W   - increase animation speed
-    print("W");
-    if (animationSpeed > 5) animationSpeed -= 3;
-  }
-  else if (keyCode === 83) { //S
-    if (animationSpeed < 60) animationSpeed += 3;
-  }
-  else if (keyCode === 85) {  //U -> save file
-    saveWIP();
-  }
-  else if (keyCode === 67) {  //C -> copy current frame
-    copyToClipboard();
-  }
-  else if (keyCode === 66) { //B -> paste clipboard to frame
-    pasteClipboard();
-  }
-  else if (keyCode === 69) {  //E -> export INO file
-    exportINO();
-  }
-  else if (keyCode === 88) { //x -> sample color
-    cur = get(mouseX, mouseY);
-    currentR = red(cur);
-    currentG = green(cur);
-    currentB = blue(cur);
-  }
-  else if (keyCode === LEFT_ARROW){
-    shiftImage(LEFT_ARROW);
-  }
-  else if (keyCode === RIGHT_ARROW){
-    shiftImage(RIGHT_ARROW);
-  }
-  else if (keyCode === UP_ARROW){
-    shiftImage(UP_ARROW);
-  }
-  else if (keyCode === DOWN_ARROW){
-    shiftImage(DOWN_ARROW);
+  else {
+
+    if (keyCode === 32) { //space
+      playback = !playback;
+    }
+    else if (keyCode === 65) {  //a        some contents regardless of what was pressed most recently
+      if (currentFrame > 0) currentFrame--;
+    }
+    else if (keyCode === 68) { //d
+      if (currentFrame < NUM_FRAMES - 1) currentFrame++;
+    }
+    else if (keyCode === 32) { //space
+      playback = !playback;
+    }
+    
+    else if (keyCode === 85) {  //U -> save file
+      saveWIP();
+    }
+    else if (keyCode === 67) {  //C -> copy current frame
+      copyToClipboard();
+    }
+    else if (keyCode === 66) { //B -> paste clipboard to frame
+      pasteClipboard();
+    }
+    else if (keyCode === 69) {  //E -> export INO file
+      exportINO();
+    }
+    else if (keyCode === 88) { //x -> sample color
+      cur = get(mouseX, mouseY);
+      currentR = red(cur);
+      currentG = green(cur);
+      currentB = blue(cur);
+    }
+    else if (keyCode === LEFT_ARROW) {
+      shiftImage(LEFT_ARROW);
+    }
+    else if (keyCode === RIGHT_ARROW) {
+      shiftImage(RIGHT_ARROW);
+    }
+    else if (keyCode === UP_ARROW) {
+      shiftImage(UP_ARROW);
+    }
+    else if (keyCode === DOWN_ARROW) {
+      shiftImage(DOWN_ARROW);
+    }
   }
   print(animationSpeed);
 }
@@ -225,7 +242,7 @@ function textInfo() {
   stroke(255);
   textSize(20);
   text("Frame: " + (currentFrame + 1) + "/" + NUM_FRAMES, width * .5, height * .5);
-  textSize(height*.025);
+  textSize(height * .025);
   text("A / D → Change current Frame (Backward/Forward)", width * .5, height * .58);
   text("SPACE → Toggle Animation Preview", width * .5, height * .63);
   text("S / W → Change Animation Speed (Only During Preview)", width * .5, height * .68);
@@ -233,6 +250,7 @@ function textInfo() {
   text("C / B → Copy Current Frame / Paste Current Frame", width * .5, height * .78);
   text("U → Save a WIP file.  To load drag file only editor window", width * .5, height * .83);
   text("E → Export Animation to Arduino Code", width * .5, height * .88);
+  text("X → Sample Existing Color for Brush (mouseOver color), ", width * .5, height * .93)
 
 
 }
@@ -283,13 +301,13 @@ function addRemoveFrames() {
     }
     if (removeFrameButton === true) {
       if (!mouseIsPressed) {
-        if(NUM_FRAMES > 1){
+        if (NUM_FRAMES > 1) {
           removeFrameButton = false;
-        animFrames.splice(currentFrame, 1);  //remove the current frame
-        if(currentFrame>1) currentFrame--;
-        NUM_FRAMES--;
+          animFrames.splice(currentFrame, 1);  //remove the current frame
+          if (currentFrame > 1) currentFrame--;
+          NUM_FRAMES--;
         }
-        
+
       }
     }
     rect(width * .5 + 330, height * .5 - 5, 150, 30);
@@ -500,65 +518,65 @@ function saveWIP() {
 
 }
 
-function shiftImage(dir){
-if(dir===LEFT_ARROW){
-  for (let y = 0; y < 16; y++) {
-    let oR = animFrames[currentFrame].pixelGrid[y][0].r;
-    let oG = animFrames[currentFrame].pixelGrid[y][0].g;
-    let oB = animFrames[currentFrame].pixelGrid[y][0].b;
-    for (let x = 0; x < 15; x++) {
-      let r_ = animFrames[currentFrame].pixelGrid[y][x+1].r;
-      let g_ = animFrames[currentFrame].pixelGrid[y][x+1].g;
-      let b_ = animFrames[currentFrame].pixelGrid[y][x+1].b;
-      animFrames[currentFrame].pixelGrid[y][x].updateColor(r_, g_, b_);
+function shiftImage(dir) {
+  if (dir === LEFT_ARROW) {
+    for (let y = 0; y < 16; y++) {
+      let oR = animFrames[currentFrame].pixelGrid[y][0].r;
+      let oG = animFrames[currentFrame].pixelGrid[y][0].g;
+      let oB = animFrames[currentFrame].pixelGrid[y][0].b;
+      for (let x = 0; x < 15; x++) {
+        let r_ = animFrames[currentFrame].pixelGrid[y][x + 1].r;
+        let g_ = animFrames[currentFrame].pixelGrid[y][x + 1].g;
+        let b_ = animFrames[currentFrame].pixelGrid[y][x + 1].b;
+        animFrames[currentFrame].pixelGrid[y][x].updateColor(r_, g_, b_);
+      }
+      animFrames[currentFrame].pixelGrid[y][15].updateColor(oR, oG, oB);
     }
-    animFrames[currentFrame].pixelGrid[y][15].updateColor(oR, oG, oB);
   }
-}
-if(dir===RIGHT_ARROW){
-  for (let y = 0; y < 16; y++) {
-    let oR = animFrames[currentFrame].pixelGrid[y][15].r;
-    let oG = animFrames[currentFrame].pixelGrid[y][15].g;
-    let oB = animFrames[currentFrame].pixelGrid[y][15].b;
-    for (let x = 15; x > 0; x--) {
-      let r_ = animFrames[currentFrame].pixelGrid[y][x-1].r;
-      let g_ = animFrames[currentFrame].pixelGrid[y][x-1].g;
-      let b_ = animFrames[currentFrame].pixelGrid[y][x-1].b;
-      animFrames[currentFrame].pixelGrid[y][x].updateColor(r_, g_, b_);
+  if (dir === RIGHT_ARROW) {
+    for (let y = 0; y < 16; y++) {
+      let oR = animFrames[currentFrame].pixelGrid[y][15].r;
+      let oG = animFrames[currentFrame].pixelGrid[y][15].g;
+      let oB = animFrames[currentFrame].pixelGrid[y][15].b;
+      for (let x = 15; x > 0; x--) {
+        let r_ = animFrames[currentFrame].pixelGrid[y][x - 1].r;
+        let g_ = animFrames[currentFrame].pixelGrid[y][x - 1].g;
+        let b_ = animFrames[currentFrame].pixelGrid[y][x - 1].b;
+        animFrames[currentFrame].pixelGrid[y][x].updateColor(r_, g_, b_);
+      }
+      animFrames[currentFrame].pixelGrid[y][0].updateColor(oR, oG, oB);
     }
-    animFrames[currentFrame].pixelGrid[y][0].updateColor(oR, oG, oB);
   }
-}
-if(dir===UP_ARROW){
-  for (let x = 0; x < 16; x++) {
-    let oR = animFrames[currentFrame].pixelGrid[0][x].r;
-    let oG = animFrames[currentFrame].pixelGrid[0][x].g;
-    let oB = animFrames[currentFrame].pixelGrid[0][x].b;
-    for (let y = 0; y <15; y++) {
-      let r_ = animFrames[currentFrame].pixelGrid[y+1][x].r;
-      let g_ = animFrames[currentFrame].pixelGrid[y+1][x].g;
-      let b_ = animFrames[currentFrame].pixelGrid[y+1][x].b;
-      animFrames[currentFrame].pixelGrid[y][x].updateColor(r_, g_, b_);
+  if (dir === UP_ARROW) {
+    for (let x = 0; x < 16; x++) {
+      let oR = animFrames[currentFrame].pixelGrid[0][x].r;
+      let oG = animFrames[currentFrame].pixelGrid[0][x].g;
+      let oB = animFrames[currentFrame].pixelGrid[0][x].b;
+      for (let y = 0; y < 15; y++) {
+        let r_ = animFrames[currentFrame].pixelGrid[y + 1][x].r;
+        let g_ = animFrames[currentFrame].pixelGrid[y + 1][x].g;
+        let b_ = animFrames[currentFrame].pixelGrid[y + 1][x].b;
+        animFrames[currentFrame].pixelGrid[y][x].updateColor(r_, g_, b_);
+      }
+      animFrames[currentFrame].pixelGrid[15][x].updateColor(oR, oG, oB);
     }
-    animFrames[currentFrame].pixelGrid[15][x].updateColor(oR, oG, oB);
   }
-}
-if(dir===DOWN_ARROW){
-  for (let x = 0; x < 16; x++) {
-    let oR = animFrames[currentFrame].pixelGrid[15][x].r;
-    let oG = animFrames[currentFrame].pixelGrid[15][x].g;
-    let oB = animFrames[currentFrame].pixelGrid[15][x].b;
-    for (let y = 15; y >0; y--) {
-      let r_ = animFrames[currentFrame].pixelGrid[y-1][x].r;
-      let g_ = animFrames[currentFrame].pixelGrid[y-1][x].g;
-      let b_ = animFrames[currentFrame].pixelGrid[y-1][x].b;
-      animFrames[currentFrame].pixelGrid[y][x].updateColor(r_, g_, b_);
+  if (dir === DOWN_ARROW) {
+    for (let x = 0; x < 16; x++) {
+      let oR = animFrames[currentFrame].pixelGrid[15][x].r;
+      let oG = animFrames[currentFrame].pixelGrid[15][x].g;
+      let oB = animFrames[currentFrame].pixelGrid[15][x].b;
+      for (let y = 15; y > 0; y--) {
+        let r_ = animFrames[currentFrame].pixelGrid[y - 1][x].r;
+        let g_ = animFrames[currentFrame].pixelGrid[y - 1][x].g;
+        let b_ = animFrames[currentFrame].pixelGrid[y - 1][x].b;
+        animFrames[currentFrame].pixelGrid[y][x].updateColor(r_, g_, b_);
+      }
+      animFrames[currentFrame].pixelGrid[0][x].updateColor(oR, oG, oB);
     }
-    animFrames[currentFrame].pixelGrid[0][x].updateColor(oR, oG, oB);
   }
-}
 
-  
+
 }
 
 function exportINO() {
@@ -574,7 +592,7 @@ function exportINO() {
           g_ = animFrames[i].pixelGrid[y][x].g;
           b_ = animFrames[i].pixelGrid[y][x].b;
         }
-        else{   //odd row, flip horizontal positions
+        else {   //odd row, flip horizontal positions
           r_ = animFrames[i].pixelGrid[y][15 - x].r;
           g_ = animFrames[i].pixelGrid[y][15 - x].g;
           b_ = animFrames[i].pixelGrid[y][15 - x].b;
@@ -585,7 +603,7 @@ function exportINO() {
 
   }
 
- 
+
 
 
 
@@ -596,20 +614,20 @@ function exportINO() {
   saveData.push("#include <avr/pgmspace.h>\n#include \"FastLED.h\"\n#define NUM_LEDS 256\n#define DATA_PIN 3\nCRGB leds[NUM_LEDS];");
 
   for (let i = 0; i < NUM_FRAMES; i++) {  //change to loop over each frame after testing one
-    saveData.push("const long animFrame" + i + "[] PROGMEM =\n{")
+    saveData.push("const long animFrame"+authorID + i + "[] PROGMEM =\n{")
     line = "";
     for (let y = 0; y < 16; y++) {
-      if(y%2===0){
+      if (y % 2 === 0) {
         for (let x = 0; x < 16; x++) {
           line += ("0x" + hex(animFrames[i].pixelGrid[y][x].r, 2) + hex(animFrames[i].pixelGrid[y][x].g, 2) + hex(animFrames[i].pixelGrid[y][x].b, 2) + ", ");
         }
       }
-      else{
+      else {
         for (let x = 0; x < 16; x++) {
-          line += ("0x" + hex(animFrames[i].pixelGrid[y][15-x].r, 2) + hex(animFrames[i].pixelGrid[y][15-x].g, 2) + hex(animFrames[i].pixelGrid[y][15-x].b, 2) + ", ");
+          line += ("0x" + hex(animFrames[i].pixelGrid[y][15 - x].r, 2) + hex(animFrames[i].pixelGrid[y][15 - x].g, 2) + hex(animFrames[i].pixelGrid[y][15 - x].b, 2) + ", ");
         }
       }
-      
+
       line += "\n";
     }
     line = line.substring(0, line.length - 3); //strip out trailing comma
@@ -622,7 +640,7 @@ function exportINO() {
   saveData.push("void loop() {");
   //load and display each set of LEDs
   for (let i = 0; i < NUM_FRAMES; i++) {
-    saveData.push("FastLED.clear();\nfor(int i = 0; i < NUM_LEDS; i++) {\nleds[i] = pgm_read_dword(&(animFrame" + i + "[i]));\n}\n\nFastLED.show();\ndelay(" + (animationSpeed / 60 * 1000) + ");\n");
+    saveData.push("FastLED.clear();\nfor(int i = 0; i < NUM_LEDS; i++) {\nleds[i] = pgm_read_dword(&(animFrame" + authorID + i + "[i]));\n}\n\nFastLED.show();\ndelay(" + (animationSpeed / 60 * 1000) + ");\n");
   }
   saveData.push("}");
 
