@@ -30,7 +30,7 @@ let currentFrame = 0;
 let NUM_FRAMES = 4; //Ended up adding two buttons to add/remove frames once the program is running.
 
 let historyFrames = []; //to store the history for each frame
-const MAX_HISTORY_ACTIONS = 30;  //number of history items to store for each frame
+const MAX_HISTORY_ACTIONS = 50;  //number of history items to store for each frame
 let currentlyPainting = false; //boolean to track when a painting action is complete (for history purposes);
 let controlPressed = false;
 let zPressed = false; //state variables for CONTROL-Z combination
@@ -174,14 +174,14 @@ function drawGradient(x, y, stepSize) {
   //strokeWeight(4);
   rectMode(CENTER);
   fill(currentR, currentG, currentB);
-  rect(width * .55, y + height * .33, width * .06, width * .06);  //make proportional size
+  rect(width * .542, y + height * .355, width * .06, width * .06);  //make proportional size
 
   //make outer rectangle the hovered-over color
   noFill();
   strokeWeight(width * .02);
   let hover = get(mouseX, mouseY);
   stroke(red(hover), green(hover), blue(hover));
-  rect(width * .55, y + height * .355, width * .08, width * .08);
+  rect(width * .542, y + height * .355, width * .065, width * .065);
   rectMode(CORNER);
   stroke(120);
   strokeWeight(1);
@@ -310,6 +310,7 @@ function textInfo() {
   text("U → Save a WIP file.  To load drag file only editor window", width * .5, height * .83);
   text("E → Export Animation to Arduino Code", width * .5, height * .88);
   text("X → Sample Existing Color for Brush (mouseOver color), ", width * .5, height * .93)
+  text("CONTROL-Z → Undo (up to 50 actions per frame) ", width * .5, height * .98)
 
 
 }
