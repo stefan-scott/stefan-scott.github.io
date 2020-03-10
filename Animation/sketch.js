@@ -29,6 +29,13 @@ let animFrames = [];
 let currentFrame = 0;
 let NUM_FRAMES = 4; //Ended up adding two buttons to add/remove frames once the program is running.
 
+let historyFrames = []; //to store the history for each frame
+const MAX_HISTORY_ACTIONS = 30;  //number of history items to store for each frame
+let currentlyPainting = false; //boolean to track when a painting action is complete (for history purposes);
+let controlPressed = false;
+let zPressed = false; //state variables for CONTROL-Z combination
+
+
 let playback = false; //boolean to toggle if animation is being displayed or not
 let animationSpeed = 30;  //change images every 30 frames
 
@@ -38,7 +45,7 @@ let newFrameButton = false;
 let removeFrameButton = false;
 
 let authorID;   //a random ID number to better facilitate merging ino files later on; should allow the array names to not overlap, 
-                //unless we are particularly unlucky.
+//unless we are particularly unlucky.
 
 function setup() {
   const c = createCanvas(windowWidth, windowHeight);
@@ -50,6 +57,8 @@ function setup() {
 
   for (let i = 0; i < NUM_FRAMES; i++) {
     animFrames.push(new Frame);
+    historyFrames.push([]); //create an array for each frame's history to hold snapshots of the Canvas
+    historyFrames[i].push(new Frame());
   }
   clipboard = new Frame();
   c.drop(handleFile);
@@ -93,6 +102,37 @@ function handleFile(file) {
     }
     else {
       print("Error - unrecognized file info");
+    }
+  }
+}
+
+function recordAction() {
+  let temp = new Frame();
+  for (let y = 0; y < 16; y++) {
+    for (let x = 0; x < 16; x++) {
+      let r_ = animFrames[currentFrame].pixelGrid[y][x].r;
+      let g_ = animFrames[currentFrame].pixelGrid[y][x].g;
+      let b_ = animFrames[currentFrame].pixelGrid[y][x].b;
+      temp.pixelGrid[y][x].updateColor(r_, g_, b_);
+    }
+  }
+  historyFrames[currentFrame].push(temp);
+  //check if too many items are stored in that array, if so splice off the oldest one
+  if (historyFrames[currentFrame].length > MAX_HISTORY_ACTIONS) {
+    historyFrames[currentFrame].shift();  //remove oldest item and shift everything else left
+  }
+}
+
+function undoAction() {
+  if (historyFrames[currentFrame].length > 1) {  //only allow undo if there is something to undo in history
+    historyFrames[currentFrame].pop();  //remove most recently stored frame
+    for (let y = 0; y < 16; y++) {  //nested loop to restore what is now the most recently stored frame 
+      for (let x = 0; x < 16; x++) {
+        let r_ = historyFrames[currentFrame][historyFrames[currentFrame].length-1].pixelGrid[y][x].r;
+        let g_ = historyFrames[currentFrame][historyFrames[currentFrame].length-1].pixelGrid[y][x].g;
+        let b_ = historyFrames[currentFrame][historyFrames[currentFrame].length-1].pixelGrid[y][x].b;
+        animFrames[currentFrame].pixelGrid[y][x].updateColor(r_, g_, b_);
+      }
     }
   }
 }
@@ -141,7 +181,7 @@ function drawGradient(x, y, stepSize) {
   strokeWeight(width * .02);
   let hover = get(mouseX, mouseY);
   stroke(red(hover), green(hover), blue(hover));
-  rect(width * .55, y + height * .33, width * .08, width * .08);
+  rect(width * .55, y + height * .355, width * .08, width * .08);
   rectMode(CORNER);
   stroke(120);
   strokeWeight(1);
@@ -178,6 +218,12 @@ function keyPressed() {  //not mixing key and keyCode, as I believe both will ha
     if (keyCode === 32) { //space
       playback = !playback;
     }
+    else if (keyCode === 90) { //Z
+      zPressed = true;
+    }
+    else if (keyCode === CONTROL) {
+      controlPressed = true;
+    }
     else if (keyCode === 65) {  //a        some contents regardless of what was pressed most recently
       if (currentFrame > 0) currentFrame--;
     }
@@ -187,7 +233,7 @@ function keyPressed() {  //not mixing key and keyCode, as I believe both will ha
     else if (keyCode === 32) { //space
       playback = !playback;
     }
-    
+
     else if (keyCode === 85) {  //U -> save file
       saveWIP();
     }
@@ -218,8 +264,20 @@ function keyPressed() {  //not mixing key and keyCode, as I believe both will ha
     else if (keyCode === DOWN_ARROW) {
       shiftImage(DOWN_ARROW);
     }
+    if (zPressed && controlPressed) {
+      zPressed = false;
+      //controlPressed = false;
+      undoAction();
+      print("UNDO");
+    }
   }
   print(animationSpeed);
+}
+
+function keyReleased() {
+  if (keyCode === CONTROL) {
+    controlPressed = false;
+  }
 }
 
 function locateCurrentPixel() {
@@ -241,6 +299,7 @@ function locateCurrentPixel() {
 function textInfo() {
   stroke(255);
   textSize(20);
+  fill(0);
   text("Frame: " + (currentFrame + 1) + "/" + NUM_FRAMES, width * .5, height * .5);
   textSize(height * .025);
   text("A / D → Change current Frame (Backward/Forward)", width * .5, height * .58);
@@ -271,6 +330,8 @@ function addRemoveFrames() {
       if (!mouseIsPressed) {
         newFrameButton = false;
         animFrames.push(new Frame);
+        historyFrames.push([]); //create an array for each frame's history to hold snapshots of the Canvas
+        historyFrames[historyFrames.length-1].push(new Frame());
         NUM_FRAMES++;
       }
     }
@@ -292,7 +353,7 @@ function addRemoveFrames() {
   stroke(255);
   textSize(12);
   rectMode(CENTER);
-  print(mouseX) - width * 1;
+  //print(mouseX) - width * 1;
   if (mouseX >= width * .5 + 255 && mouseX <= width * .5 + 408 && mouseY >= height * .5 - 20 && mouseY <= height * .5 + 10) {
     fill(0, 50, 190);
     if (mouseIsPressed) {
@@ -304,6 +365,7 @@ function addRemoveFrames() {
         if (NUM_FRAMES > 1) {
           removeFrameButton = false;
           animFrames.splice(currentFrame, 1);  //remove the current frame
+          historyFrames.splice(currentFrame, 1);
           if (currentFrame > 1) currentFrame--;
           NUM_FRAMES--;
         }
@@ -371,8 +433,9 @@ class Frame {
 
 
   mouseEvent() {
-
+    //to Do: Track Changes to add an undo feature.
     if (mouseIsPressed) {
+      currentlyPainting = true;
       if (currentPixelY <= 15 && currentPixelX <= 15) {  //cursor in the drawing area
         this.pixelGrid[currentPixelY][currentPixelX].updateColor(currentR, currentG, currentB);
         print("draw");
@@ -384,6 +447,13 @@ class Frame {
         currentR = red(cur);
         currentG = green(cur);
         currentB = blue(cur);
+      }
+    }
+    else {
+      if (currentlyPainting) {
+        recordAction();
+        currentlyPainting = false;
+        print(historyFrames[currentFrame]);
       }
     }
   }
@@ -420,6 +490,8 @@ class Pixel {
     this.b = b;
   }
 }
+
+
 
 class Slider {
   constructor(x_, y_, h_) {
@@ -614,7 +686,7 @@ function exportINO() {
   saveData.push("#include <avr/pgmspace.h>\n#include \"FastLED.h\"\n#define NUM_LEDS 256\n#define DATA_PIN 3\nCRGB leds[NUM_LEDS];");
 
   for (let i = 0; i < NUM_FRAMES; i++) {  //change to loop over each frame after testing one
-    saveData.push("const long animFrame"+authorID + i + "[] PROGMEM =\n{")
+    saveData.push("const long animFrame" + authorID + i + "[] PROGMEM =\n{")
     line = "";
     for (let y = 0; y < 16; y++) {
       if (y % 2 === 0) {
