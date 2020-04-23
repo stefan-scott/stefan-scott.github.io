@@ -19,7 +19,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(800, 500);
   testFish = new ScottSFish(100);
   topColor = color(100, 154, 245);
   bottomColor = color(43, 74, 200);
