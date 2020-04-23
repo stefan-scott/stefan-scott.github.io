@@ -212,8 +212,8 @@ class ScottSFish extends AnimatedObject {
     this.zeroxVector = createVector(0, 0);
     this.imagesLoaded = 0;
     this.fishImages = [];
-    this.fishImages.push(loadImage("assets/ScottFishL.png", this.loadedImages()));
-    this.fishImages.push(loadImage("assets/ScottFishR.png", this.loadedImages()));
+    this.fishImages.push(loadImage("assets/scottFishL.png", this.loadedImages()));
+    this.fishImages.push(loadImage("assets/scottFishR.png", this.loadedImages()));
   }
 
   loadedImages() {
