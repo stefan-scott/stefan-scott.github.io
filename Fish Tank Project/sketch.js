@@ -5,7 +5,7 @@ const BG_SLICE_HEIGHT = 10;
 let topColor;
 let bottomColor;
 
-const CANVAS_SCALE = 0.23; //use to scale decorations to other sizes of Canvas
+const CANVAS_SCALE = 0.3; //use to scale decorations to other sizes of Canvas
 
 let sandSpots = [];
 let tankDecorations = [];
