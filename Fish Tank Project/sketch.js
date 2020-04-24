@@ -115,7 +115,7 @@ class AnimatedObject {
 
     //you can either use this.x and this.y   or  a vector(pos) to manage location
     this.x = random(width * 0.15, width * 0.85);
-    this.y = random(height * 0.35, width * 0.75);
+    this.y = random(height * 0.35, height * 0.75);
     this.pos = createVector(this.x, this.y);
 
     //As well, you can either use an xSpeed and ySpeed variable or a vel vector
@@ -260,7 +260,7 @@ class ScottSFish extends AnimatedObject {
         }
       }
       //small chance to blow bubbles
-      if (random(200) < 5) {
+      if (random(200) < 4) {
         this.bubbleCounter = int(random(30, 70));
       }
       if (this.bubbleCounter > 0) {
