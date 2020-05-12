@@ -26,6 +26,7 @@ function setup() {
   fishCollection.push(new ThomasSFish(45));
   fishCollection.push(new ThomasSFish(30));
   fishCollection.push(new JordanCFish(75));
+  fishCollection.push(new GreenFish(100));
   topColor = color(100, 154, 245);
   bottomColor = color(43, 74, 200);
   initSandSpots();
@@ -628,3 +629,86 @@ class JordanBubbles {
     }
   }
 }
+
+/** A super class for animated objects */
+class AnimatedObjectNatalia {
+  constructor() {
+    this.x = random(width * 0.15, width * 0.85);
+    this.y = random(height * 0.35, height * 0.75);
+    this.pos = createVector(0,0);
+    //to track movement velocity.
+    this.xSpeed = 5;
+    this.ySpeed = 5;
+    this.size = 50;
+    super.dirX = random(-1, 1);
+    super.dirY = random(-1, 1);
+    this.decreasing = 0.5;
+    this.accelerating = 1.5;
+    this.chance;
+  }
+
+  move() {
+    if (this.x > width - 100 || this.x < 0) {
+      this.dirX *= -1;
+    }
+    if (this.y > height - 100 || this.y < 0) {
+      this.dirY *= -1;
+    }
+    this.chance = int(random(0, 100));
+    if (this.chance <= 33) {
+      if (this.xSpeed >= 0.2 || this.ySpeed >= 0.2) {
+        this.xSpeed *= this.decreasing;
+        this.ySpeed *= this.decreasing;
+      }
+    }
+    if (this.chance >= 66) {
+      if (this.xSpeed < 8 || this.ySpeed < 8) {
+        this.xSpeed *= this.accelerating;
+        this.ySpeed *= this.accelerating;
+      }
+    }
+    this.x += this.xSpeed * this.dirX;
+    this.y += this.xSpeed * this.dirY;
+    if (this.chance > 98) {
+      this.dirX *= random(-2, 2);
+      if (this.chance < 2 || this.chance > 99) {
+        this.dirY *= random(-2, 2);
+      }
+    }
+  }
+
+  compare(objArr) {
+    
+  }
+  getX() { return this.x; }
+  getY() { return this.y; }
+  getSize() { return this.size; }
+  getxSpeed() { return this.xSpeed; }
+  getySpeed() { return this.ySpeed; }
+}
+
+class GreenFish extends AnimatedObjectNatalia {
+  constructor(x, y, size) {
+    super(x, y, size);
+    this.greenFishImages = [];
+    this.greenFishImages.push(loadImage("assets/greenfishLeft.png", this.loadedImage()));
+    this.greenFishImages.push(loadImage("assets/greenfishRight.png", this.loadedImage()));
+    this.loadingComplete = false;
+    this.loadCounter;
+  }
+  loadedImage() {
+    this.loadCounter++;
+    if (this.loadCounter) {
+      this.loadingComplete = true;
+    }
+  }
+  display() {
+    if (this.dirX < 0) {
+      image(this.greenFishImages[0], this.x, this.y, 100, 100);
+    } else { image(this.greenFishImages[1], this.x, this.y, 100, 100); }
+  }
+  move() {
+    super.move();
+  }
+}
+
