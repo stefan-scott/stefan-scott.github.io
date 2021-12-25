@@ -23,7 +23,7 @@ function preload() {
 function setup() {
   createCanvas(800, 500);
   fishCollection.push(new ScottSFish(100));
-  // fishCollection.push(new ______Fish(?));   //these will be updated as we merge your fish class into this program.
+  fishCollection.push(new BartschNFish(random(width), random(height)));   //these will be updated as we merge your fish class into this program.
   // fishCollection.push(new ______Fish(?));
   // fishCollection.push(new ______Fish(?));
   // fishCollection.push(new ______Fish(?)); 
@@ -288,6 +288,9 @@ class ScottSFish extends AnimatedObject {
     }
   }
 
+  getX(){ return this.pos.x; }
+  getY(){ return this.pos.y; }
+  
   display() {
     if (this.imagesLoaded === 2) {
 
@@ -317,6 +320,76 @@ class ScottSFish extends AnimatedObject {
   compare(objArr) {
     //
 
+  }
+}
+
+/*****************************************
+Define your Fish class below
+please name according to this convention:
+Lastname Firstinitial Fish
+i.e  for Sebastion Tate:  class TateSFish
+******************************************/
+class BartschNFish extends AnimatedObject{
+  constructor(x, y){
+    super(x,y);
+    this.nathanBJellyFish = [];
+    this.loadCounter = 0;
+    this.loadingComplete = false;
+    this.xOff = random(0,width);
+    this.yOff = random(0,height);
+    this.xInc = 0.0025; //speed in x movement of jellyfish
+    this.yInc = 0.0020; //speed in y movement of jellyfish
+    this.otherX = 0;
+    this.otherY = 0;
+    this.nathanBJellyFish.push(loadImage("assets/BartschN - A.svg",this.loadedImage())); //yellow
+    this.nathanBJellyFish.push(loadImage("assets/BartschN - B.svg",this.loadedImage())); //orange
+    this.nathanBJellyFish.push(loadImage("assets/BartschN - C.svg",this.loadedImage())); //red
+    this.nathanBJellyFish.push(loadImage("assets/BartschN - D.svg",this.loadedImage())); //white
+  }
+
+  loadedImage(){ //loads images
+    this.loadCounter++;
+    if(this.loadCounter === 4){
+      this.loadingComplete = true;
+    }
+  }
+
+  move(){ //controls the movement of x and y using noise() for randomness
+    if(this.loadingComplete){
+      this.xOff += this.xInc;
+      this.yOff += this.yInc;
+      this.x = noise(this.xOff) * width;
+      this.y = noise(this.yOff) * height;
+    }
+  }
+
+  display(){ //displays images based on closest sea life
+    if(this.loadingComplete && this.closest <= 60){ //if very close turn red
+      image(this.nathanBJellyFish[2],this.x,this.y,100,100);
+    }
+    else if(this.loadingComplete && this.closest <= 85){ //if semi-close turn orange
+      image(this.nathanBJellyFish[1],this.x,this.y,100,100);
+    }
+    else if(this.loadingComplete && this.closest <= 110){ //if approaching turn yellow
+      image(this.nathanBJellyFish[0],this.x,this.y,100,100);
+    }
+    else if(this.loadingComplete){ //if far away turn white
+      image(this.nathanBJellyFish[3],this.x,this.y,100,100);
+    }
+    this.closest = 111;
+  }
+
+  compare(objArr) { //compare current jellyfish to sealife
+    for(let i = 0; i < objArr.length; i++){
+      if(objArr[i] != this){ //if not this value in array
+        this.otherX = objArr[i].getX(); //find other creatures x
+        this.otherY = objArr[i].getY(); //find other creatures x
+        this.distance = dist(this.x, this.y, this.otherX, this.otherY); //value of distance from this jellyfish to set creature
+        if(this.distance < this.closest){ //if current creature is closer than previously closer creature swap closer value
+          this.closest = this.distance;
+        }
+      }
+    }
   }
 
 }
