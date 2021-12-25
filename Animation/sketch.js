@@ -138,6 +138,8 @@ function undoAction() {
 }
 
 function copyToClipboard() {
+  //clipboard is a temporary 2D array to store one frame's worth of information,
+  //to be pasted somewhere
   for (let y = 0; y < 16; y++) {
     for (let x = 0; x < 16; x++) {
       let r_ = animFrames[currentFrame].pixelGrid[y][x].r;
@@ -149,6 +151,7 @@ function copyToClipboard() {
 }
 
 function pasteClipboard() {
+  //takes data from the clipboard and overwrites the current frame's pixel data
   for (let y = 0; y < 16; y++) {
     for (let x = 0; x < 16; x++) {
       let r_ = clipboard.pixelGrid[y][x].r;
@@ -160,6 +163,7 @@ function pasteClipboard() {
 }
 
 function drawGradient(x, y, stepSize) {
+  //draws the Hue selection gradient for pen color
   noStroke();
   colorMode(HSB, 255);
   for (let i = 0; i < width * 0.25; i += stepSize) {
