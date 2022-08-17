@@ -1,5 +1,5 @@
 let video;
-const GRID_SPACING = 20;
+const GRID_SPACING = 5;
 
 function setup(){
   createCanvas(640,480);
