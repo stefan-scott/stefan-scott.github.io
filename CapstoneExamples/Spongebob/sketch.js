@@ -121,71 +121,71 @@ let shop;
 
 function preload() {
   // images
-  bImage = loadImage("assets/backg1.png");
-  bImage2 = loadImage("assets/backg2.png");
-  burgerImage = loadImage("assets/4.png");
-  jamImage = loadImage("assets/5.png");
-  rockImage = loadImage("assets/rock.png");
-  homeImage = loadImage("assets/home.png");
-  shopImage = loadImage("assets/shop.png");
-  shopCharacters = loadImage("assets/shopCharacters.png");
-  values = loadImage("assets/values.png");
-  notEnough = loadImage("assets/notEnough.png");
+  bImage = loadImage("./assets/backg1.png");
+  bImage2 = loadImage("./assets/backg2.png");
+  burgerImage = loadImage("./assets/4.png");
+  jamImage = loadImage("./assets/5.png");
+  rockImage = loadImage("./assets/rock.png");
+  homeImage = loadImage("./assets/home.png");
+  shopImage = loadImage("./assets/shop.png");
+  shopCharacters = loadImage("./assets/shopCharacters.png");
+  values = loadImage("./assets/values.png");
+  notEnough = loadImage("./assets/notEnough.png");
 
   // sounds
-  bubble = loadSound("sounds/bigBubble.mp3");
-  button = loadSound("sounds/button.mp3");
-  coin = loadSound("sounds/coin.mp3");
-  countSound = loadSound("sounds/countDown.wav");
-  dutchMan = loadSound("sounds/DutchMan.mp3");
-  bite = loadSound("sounds/bite.mp3");
-  collect = loadSound("sounds/collectcoin.mp3");
-  no = loadSound("sounds/bobTalking/No.mp3");
-  oops = loadSound("sounds/bobTalking/oops.mp3");
-  yippee = loadSound("sounds/bobTalking/Yippee.mp3");
-  tryAgain = loadSound("sounds/bobTalking/tryAgain.mp3");
+  bubble = loadSound("./sounds/bigBubble.mp3");
+  button = loadSound("./sounds/button.mp3");
+  coin = loadSound("./sounds/coin.mp3");
+  countSound = loadSound("./sounds/countDown.wav");
+  dutchMan = loadSound("./sounds/DutchMan.mp3");
+  bite = loadSound("./sounds/bite.mp3");
+  collect = loadSound("./sounds/collectcoin.mp3");
+  no = loadSound("./sounds/bobTalking/No.mp3");
+  oops = loadSound("./sounds/bobTalking/oops.mp3");
+  yippee = loadSound("./sounds/bobTalking/Yippee.mp3");
+  tryAgain = loadSound("./sounds/bobTalking/tryAgain.mp3");
 
   //spongebob animation
   for (let i = 0; i < 4; i++) {
-    sAnimation.push(loadImage("assets/" + i + ".png"));
+    sAnimation.push(loadImage("./assets/" + i + ".png"));
   }
   //spongebob riding jellyFish animation
   for (let i = 0; i < 3; i++) {
-    jellyAnimation.push(loadImage("assets/jellychar/" + i + ".png"));
+    jellyAnimation.push(loadImage("./assets/jellychar/" + i + ".png"));
   }
   //boss entrance animation
   for (let i = 0; i < 7; i++) {
-    startBoss.push(loadImage("assets/villian/" + i + ".png"));
+    startBoss.push(loadImage("./assets/villian/" + i + ".png"));
   }
   //boss end animation
   for (let i = 6; i >= 0; i--) {
-    endBoss.push(loadImage("assets/villian/" + i + ".png"));
+    endBoss.push(loadImage("./assets/villian/" + i + ".png"));
   }
   //boss moving animation
   for (let i = 6; i < 12; i++) {
-    bossAnimation.push(loadImage("assets/villian/" + i + ".png"));
+    bossAnimation.push(loadImage("./assets/villian/" + i + ".png"));
   }
   //power ups
   for (let i = 0; i < 4; i++) {
-    double.push(loadImage("assets/powerups/double" + i + ".png"));
+    double.push(loadImage("./assets/powerups/double" + i + ".png"));
   }
   for (let i = 0; i < 4; i++) {
-    magnet.push(loadImage("assets/powerups/magnet" + i + ".png"));
+    magnet.push(loadImage("./assets/powerups/magnet" + i + ".png"));
   }
   for (let i = 0; i < 4; i++) {
-    shield.push(loadImage("assets/powerups/shield" + i + ".png"));
+    shield.push(loadImage("./assets/powerups/shield" + i + ".png"));
   }
   // dying animation
   for (let i = 0; i < 5; i++) {
-    dying.push(loadImage("assets/dying/" + i + ".png"));
+    dying.push(loadImage("./assets/dying/" + i + ".png"));
   }
   // dying animation
   for (let i = 0; i < 5; i++) {
-    dying2.push(loadImage("assets/dying2/" + i + ".png"));
+    dying2.push(loadImage("./assets/dying2/" + i + ".png"));
   }
   // count down animation
   for (let i = 3; i > 0; i--) {
-    countDown.push(loadImage("assets/count" + i + ".png"));
+    countDown.push(loadImage("./assets/count" + i + ".png"));
   }
 }
 
