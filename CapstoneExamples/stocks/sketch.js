@@ -4,6 +4,24 @@ let stockPrice = 100;
 let stocksOwned = 0;
 let buyButton, sellButton;
 let currentPage = 'Home'; // Initial page
+let shopImage, factoryImage, constructionCompanyImage, itCompanyImage, shippingCompanyImage, taxiCompanyImage;
+let spacing = 100;
+let imageSize = 80;
+let shopOpened = false;
+let shops = [];
+
+
+function preload() {
+  // Load images
+  shopImage = loadImage('assets/Shop.png');
+  factoryImage = loadImage('assets/Factory.png');
+  constructionCompanyImage = loadImage('assets/ConstructionCompany.png');
+  itCompanyImage = loadImage('assets/ITCompany.png');
+  shippingCompanyImage = loadImage('assets/ShippingCompany.png');
+  taxiCompanyImage = loadImage('assets/TaxiCompany.png');
+}
+
+
 
 
 class Stock {
@@ -17,6 +35,8 @@ class Stock {
   }
 
 
+
+
   updatePrice() {
     // Simulate a random walk model
     let randomChange = randomGaussian(0, this.volatility);
@@ -28,12 +48,18 @@ class Stock {
     this.price += randomChange;
 
 
+
+
     // Ensure the price doesn't go negative
     this.price = max(this.price, 0);
 
 
+
+
     // Store the current stock price in the history array
     this.history.push(this.price);
+
+
 
 
     // Trim the history array to keep only the last 30 values
@@ -48,6 +74,8 @@ class Stock {
       user.incrementBalance(dividendAmount);
 
 
+
+
       // Reset dividend counter and generate a new dividend rate
       this.dividendCounter = 0;
       this.dividendRate = random(0.005, 0.03);
@@ -55,6 +83,8 @@ class Stock {
       this.dividendCounter++;
     }
   }
+
+
 
 
       drawGraph(x, y, width, height) {
@@ -71,11 +101,15 @@ class Stock {
     endShape();
 
 
+
+
     // Draw graph border
     noFill();
     stroke(200);
     strokeWeight(1);
     rect(x, y, width, height);
+
+
 
 
     // Display the latest change in stock value
@@ -91,6 +125,8 @@ class Stock {
   }
 
 
+
+
   calculateLatestChange() {
     // Calculate the latest change in stock value
     if (this.history.length >= 2) {
@@ -100,6 +136,10 @@ class Stock {
     }
   }
 }
+
+
+
+
 
 
 
@@ -115,6 +155,8 @@ class Button {
   }
 
 
+
+
     display() {
     fill(150);
     rect(this.x, this.y, this.width, this.height);
@@ -125,10 +167,14 @@ class Button {
   }
 
 
+
+
   isClicked(mouseX, mouseY) {
     return mouseX >= this.x && mouseX <= this.x + this.width && mouseY >= this.y && mouseY <= this.y + this.height;
   }
 }
+
+
 
 
 class ClickerButton {
@@ -142,6 +188,8 @@ class ClickerButton {
   }
 
 
+
+
   display() {
     fill(150);
     rect(this.x, this.y, this.width, this.height);
@@ -152,6 +200,8 @@ class ClickerButton {
   }
 
 
+
+
   isClicked(mouseX, mouseY) {
     return mouseX >= this.x && mouseX <= this.x + this.width && mouseY >= this.y && mouseY <= this.y + this.height;
   }
@@ -160,11 +210,17 @@ class ClickerButton {
 
 
 
+
+
+
+
 class User {
   constructor() {
-    this.balance = 1000;
+    this.balance = 10000;
     this.holdings = [];
   }
+
+
 
 
   buyStock(stock, quantity) {
@@ -181,6 +237,8 @@ class User {
       return false; // Insufficient funds
     }
   }
+
+
 
 
   sellStock(stock, quantity) {
@@ -201,6 +259,8 @@ class User {
   }
 
 
+
+
   incrementBalance(amount) {
     this.balance += amount;
   }
@@ -209,8 +269,6 @@ class User {
     return this.holdings.reduce((total, stock) => total + stock.price * stock.quantity, 0);
   }
 }
-
-
 
 
 let marcedesBenc = new Stock("Marcedes-Benc", 100, 2);
@@ -228,11 +286,13 @@ let user;
 let buyButtons = [];
 let sellButtons = [];
 let portfolioButton;
-let backButton;
+let stocksButton;
+let businessButton;
 let clickerButton;
 
 
 let showPortfolioPage = false;
+let showBusinessPage = false;
 
 
 function setup() {
@@ -268,8 +328,12 @@ function setup() {
   portfolioButton = new Button("Portfolio", width - 200, 20, 80, 30, () => showPortfolioPage = true);
 
 
-  // Initialize Back button
-  backButton = new Button("Back", width - 80 - 50, 20, 60, 30, () => showPortfolioPage = false);
+  // Initialize Stocks button on the Portfolio page
+  stocksButton = new Button("Stocks", width - 200, 70, 80, 30, () => showPortfolioPage = false);
+
+
+  // Initialize Business button on the Portfolio page
+  businessButton = new Button("Business", width - 200, 120, 80, 30, () => showBusinessPage = true);
 
 
   // Initialize Clicker button
@@ -284,12 +348,55 @@ function draw() {
   if (showPortfolioPage) {
     // Draw Portfolio page
     drawPortfolioPage();
+  } else if (showBusinessPage) {
+    // Draw Business page
+    drawBusinessPage();
   } else {
     // Draw stocks page
     drawStocksPage();
   }
 }
 
+function drawBusinessPage() {
+  // Clear the background
+  background(240);
+
+  // Display images for each business type with more space between them
+  let imageSize = 80;
+
+  // Display information for each shop
+  textSize(14);
+  fill(50);
+
+  for (let i = 0; i < shops.length; i++) {
+    let shopInfo = shops[i];
+
+    // Display Shop information on the left side of the screen
+    let shopX = 200;
+    let shopY = 200 + i * 100; // Adjusted Y-coordinate
+    text(`Shop ${i + 1}`, shopX, shopY + 15);
+    text(`Stage`, shopX, shopY + 30);
+    text(`Upgrade Cost: `, shopX, shopY + 45);
+    text(`Income: $${shopInfo.income.toFixed(2)} per 30s`, shopX, shopY + 60);
+  }
+
+  // Display other business icons
+
+  // Display Shop icon at the top-right position with some space from the edge
+  image(shopImage, width - imageSize - 500, 200, imageSize, imageSize);
+
+  // Display Shop description text beneath the Shop icon on the right side
+  text("Shop", width - imageSize - 500 + imageSize / 2, 200 + imageSize + 15);
+  text("Cost: $4,899", width - imageSize - 500 + imageSize / 2, 200 + imageSize + 30);
+  text("Stage 1 Income: $102.06 per 30s", width - imageSize - 500 + imageSize / 2, 200 + imageSize + 45);
+
+  // Display Stocks button on the Business page
+  stocksButton.display();
+
+  // Display Portfolio button on the Business page
+  portfolioButton.display();
+
+}
 
 function drawStocksPage() {
   // Display stock information and draw graphs with 2 stocks on each row
@@ -299,8 +406,12 @@ function drawStocksPage() {
   let yOffset = 30;
 
 
+
+
   let cellWidth = (width - (numCols + 1) * xOffset) / numCols;
   let cellHeight = (height - yOffset) / numRows;
+
+
 
 
   // Display user balance (moved outside the loop)
@@ -309,9 +420,13 @@ function drawStocksPage() {
   text(`User Balance: $${user.balance.toFixed(2)}`, xOffset, yOffset - 10);
 
 
+
+
   for (let i = 0; i < stocks.length; i++) {
     let rowNum = floor(i / numCols);
     let colNum = i % numCols;
+
+
 
 
     let stock = stocks[i];
@@ -320,6 +435,8 @@ function drawStocksPage() {
     textSize(14); // Smaller text size
     fill(50); // Darker text color
     text(`${stock.name} Price: $${stock.price.toFixed(2)}`, xOffset + colNum * (cellWidth + xOffset), yOffset + rowNum * cellHeight + 15);
+
+
 
 
     // Draw stock price graph
@@ -331,15 +448,22 @@ function drawStocksPage() {
     );
 
 
+
+
     // Draw Buy and Sell buttons
     buyButtons[i].display();
     sellButtons[i].display();
+    businessButton.display();
   }
+
+
 
 
   // Draw Portfolio button
   portfolioButton.display();
 }
+
+
 
 
 function drawPortfolioPage() {
@@ -349,16 +473,22 @@ function drawPortfolioPage() {
   text("Portfolio:", 20 + 150, 30); // Adjusted x-coordinate
 
 
+
+
   // Display user balance in Portfolio page
   textSize(14);
   fill(50);
   text(`User Balance: $${user.balance.toFixed(2)}`, width - 330, 80);
 
 
+
+
   // Use forEach to iterate over user holdings
   user.holdings.forEach((holding, i) => {
     // Display stock information and estimate dividend yield
     text(`${holding.name}: ${holding.quantity} stocks - Value: $${(holding.price * holding.quantity).toFixed(2)}`, 20 + 150, 90 + i * 30); // Adjusted x-coordinate
+
+
 
 
     // Calculate and display estimated dividend yield
@@ -368,17 +498,26 @@ function drawPortfolioPage() {
   });
 
 
+
+
   text(`Total Portfolio Value: $${user.calculatePortfolioValue().toFixed(2)}`, 20 + 150, height - 10); // Adjusted x-coordinate
 
 
-  // Add a button to go back to the stocks page
-  backButton.display();
 
 
- 
+  // Display Stocks button on the Portfolio page
+  stocksButton.display();
+
+
+  // Display Business button on the Portfolio page
+  businessButton.display();
+
+
   // Display clicker button
   clickerButton.display();
 }
+
+
 
 
 function mouseClicked() {
@@ -387,6 +526,8 @@ function mouseClicked() {
     if (buyButtons[i].isClicked(mouseX, mouseY)) {
       buyButtons[i].onClick();
     }
+
+
 
 
     if (sellButtons[i].isClicked(mouseX, mouseY)) {
@@ -400,17 +541,65 @@ function mouseClicked() {
   }
 
 
-  // Check if Portfolio button is clicked
-  if (portfolioButton.isClicked(mouseX, mouseY)) {
-    showPortfolioPage = true;
-  }
-
-
-  // Check if Back button is clicked on the Portfolio page
-  if (showPortfolioPage && backButton.isClicked(mouseX, mouseY)) {
+  // Check if Stocks button is clicked on the Portfolio page
+  if (stocksButton.isClicked(mouseX, mouseY)) {
     showPortfolioPage = false;
   }
+
+
+  // Check if Business button is clicked on the Portfolio page
+  if (businessButton.isClicked(mouseX, mouseY)) {
+    showBusinessPage = true;
+  }
+
+
+  // Check if Stocks button is clicked on the Business page
+  if (stocksButton.isClicked(mouseX, mouseY)) {
+    showPortfolioPage = false;
+    showBusinessPage = false;
+  }
+
+
+  // Check if Portfolio button is clicked on the Business page
+  if (portfolioButton.isClicked(mouseX, mouseY)) {
+    showPortfolioPage = true;
+    showBusinessPage = false;
+  }
+
+  let shopIconX = width - imageSize - 500;
+  let shopIconY = 200;
+
+  if (
+    mouseX >= shopIconX &&
+    mouseX <= shopIconX + imageSize &&
+    mouseY >= shopIconY &&
+    mouseY <= shopIconY + imageSize
+  ) {
+    // Check if the player has enough money
+    if (user.balance >= 4899) {
+      // Show a pop-up to enter a name for the shop
+      let shopName = prompt(`Enter a name for your shop. It will cost $4,899.`);
+      shopName = shopName ? shopName.trim() : "";
+
+      if (shopName && user.balance >= 4899) {
+        // Deduct the cost from the player's balance
+        user.balance -= 4899;
+
+        // Add information about the new shop to the array
+        shops.push({
+          name: shopName,
+          income: 102.06,
+        });
+
+        // Display a message
+        alert(`Congratulations! Your shop "${shopName}" is now open.`);
+      }
+    }
+  }
 }
+
+
+
 
 
 function updateStockPrices() {
@@ -419,6 +608,8 @@ function updateStockPrices() {
     stock.updatePrice();
   }
 }
+
+
 
 
 function buyStockPrompt(stock) {
@@ -431,6 +622,8 @@ function buyStockPrompt(stock) {
 }
 
 
+
+
 function sellStockPrompt(stock) {
   let quantity = prompt(`Enter the quantity of ${stock.name} stocks you want to sell:`);
   quantity = parseInt(quantity);
@@ -438,6 +631,14 @@ function sellStockPrompt(stock) {
     user.sellStock(stock, quantity);
   }
 }
+
+
+
+
+
+
+
+
 
 
 
