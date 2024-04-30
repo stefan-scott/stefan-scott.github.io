@@ -121,7 +121,7 @@ let shop;
 
 function preload() {
   // images
-  bImage = loadImage("./assets/backg1.png");
+  bImage = loadImage("https://stefan-scott.github.io/CapstoneExamples/Spongebob/assets/backg1.png");
   bImage2 = loadImage("./assets/backg2.png");
   burgerImage = loadImage("./assets/4.png");
   jamImage = loadImage("./assets/5.png");
