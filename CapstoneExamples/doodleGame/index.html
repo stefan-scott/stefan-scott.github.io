@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+
+    <title>Sketch</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- Linking to the main p5.js library, which allows your code to use all 
+       p5 functions. Using this version while developing your code allows p5 
+       to provide more Friendly Error Messages if you mess something up... Downlaoding all the libraries that are used-->
+       <script src="libraries/p5.js"></script>
+       <script src="libraries/p5.scribble.js"></script>
+       <script src="libraries/p5.collide2d.js"></script>
+       <script src="libraries/p5.sound.min.js"></script>
+       <script src="sketch.js"></script>
+ 
+
+    <!--Creating a shadow for my input-->
+    <style>
+      .custom-input::placeholder {
+        text-shadow: 0 0 5px #0c5000;
+      }
+    </style>
+    <style>
+      /*Getting the font that is called titleFont*/
+      @font-face {
+          font-family: 'titleFont';  
+          src: local('titleFont'), url('titleFont.ttf') format('truetype');
+      }
+      /* Everything I created here it's size, and postion is based on the canvas size */
+      /*Customizing the game Title*/
+      .gameTitle {
+          position: absolute;
+          font-size: 6vw;
+          left: 50%;
+          top: 20%;
+          text-align: center;
+          transform: translate(-50%, -50%) skew(-20deg, -2deg); /* Make the title a little rotated*/
+          color: #EEEEEE; 
+          font-family: 'titleFont'
+          
+      
+      }
+      /*Customizing the label - text to the choose canvas*/
+      .canvasSizeLabel {
+       position: absolute;
+       font-size: 2.5vw; /* Adjust the font size as needed */
+
+       left: 50%; 
+       top: 58%;
+       transform: translate(-50%, -50%);
+       font-family: "titleFont";
+      }
+      /*Customizing the label for the volume text*/
+      .volume {
+        position: absolute;
+        font-size: 2.5vw; /* Adjust the font size as needed */
+
+        left: 50%; 
+        top: 92.5%;
+        transform: translate(-50%, -50%);
+        font-family: "titleFont";
+            
+      
+      }
+      /*Customizing the query */
+      .canvasSizeDropdown {
+        position: absolute;
+        left: 50%;
+        top: 65%;
+        transform: translate(-50%, -50%); 
+        width: 50%; /* Adjust the width as needed */
+        text-align: center;
+        font-family: "titleFont";
+        height: 10%;
+        font-size: 2.25vw;
+        color: #EDF1D6;
+        background-color: #393E46; 
+
+        border: 0.5vw  solid #222831;
+        cursor: pointer;
+        transform-origin: center top;
+      }
+      .canvasSizeDropdown.active {
+        background-color: #798777d2; /* Change the color of the query when pressed */
+      }
+      /*Customizing the game Title*/
+      .startButton {
+        position: absolute;
+        width: 50%;
+        height: 10%; 
+        left: 50%;
+        top: 50%; 
+        transform: translate(-50%, -50%); 
+        color: #EDF1D6;
+        background-color: #393E46; 
+        font-size: 3vw ;
+        font-family:'titleFont';
+        border: 0.5vw solid #222831;
+    }
+
+    .startButton:hover {
+      background-color: #798777d2; /* Change the background color on hover for the startButton */
+    } 
+
+    </style>
+
+
+  </head>
+
+  <body>
+    <!--Creating the text for the text for the title and the text that tells the player to choose a canvas size and for volume-->
+    <label id="canvasSizeLabel" for="canvasSize" class="canvasSizeLabel">Choose a canvas size:</label>
+    <label id="gameTitle" class="gameTitle">SCRIBBLY DRAWING GAME</label>
+    <label id="volume" class="volume">Volume: </label> 
+    
+    <!--Creating the query options -->
+    <select id="canvasSize" class="canvasSizeDropdown">
+    
+      
+      <option value= "1200x800"> 1200x800</option>
+      <option value= "1366x768"> 1366x768</option>
+      <option value= "1440x900"> 1440x900</option>
+      <option value= "1800x800"> 1800x880</option>
+      <option value="windowWidthxwindowHeight">windowWidth x windowHeight</option> 
+
+
+      
+    </select>
+    <!--Crating a start button that start's the game if the player clicks on it-->
+    <button id="startButton" class="startButton" onclick="startGame()"> Start Game</button>
+
+    <script src="costumswitch.js"></script>
+    <script src="colorcircles.js"></script>
+    <script src="message.js"></script>
+    <script src="sketch.js"></script>
+    
+  </body>
+</html>

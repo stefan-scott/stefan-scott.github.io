@@ -1,0 +1,20 @@
+planning 
+
+tower defense?
+three? tower types
+four? baddies, boss
+waves
+lives, mony, goal fr baddies
+grid base
+
+
+
+glowy simple design perhps
+multi levels
+
+
+testers comments:
+towers can overlap the exit for creating a tower
+make grafics and sound
+increase accuracy for towers
+sprayers are overpowered
