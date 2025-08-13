@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Build Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #333;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .content-container {
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 4rem;
+      position: relative;
+    }
+    .content {
+      display: none;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 4rem auto;
+      background: white;
+      position: relative;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .content.fade-in {
+      opacity: 1;
+    }
+    .content.active {
+      display: block;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      margin: 1rem 0;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 0.5rem 0;
+      background: #fff;
+      border-top: 1px solid #ccc;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 999;
+    }
+    .nav div {
+      text-align: center;
+      flex: 1;
+    }
+    .nav a {
+      background: #ccc;
+      padding: 0.5rem 1rem;
+      border-radius: 50%;
+      text-decoration: none;
+      color: black;
+      display: inline-block;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .nav a:hover {
+      background-color: #bbb;
+      transform: scale(1.1);
+    }
+    .nav a.active {
+      background: #4CAF50;
+      color: white;
+    }
+    .nav-label {
+      font-size: 0.8rem;
+      text-align: center;
+      margin-top: 0.25rem;
+    }
+    .arrow-button {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: #444;
+      cursor: pointer;
+      user-select: none;
+      padding: 0.5rem;
+      z-index: 1000;
+      background-color: #ffffffaa;
+      border-radius: 50%;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .arrow-button:hover {
+      background-color: #dddddd;
+      transform: scale(1.1);
+    }
+    .arrow-left {
+      left: 1%;
+    }
+    .arrow-right {
+      right: 1%;
+    }
+    @media (max-width: 900px) {
+      .arrow-left, .arrow-right {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Robot Build Guide</h1>
+  </header>
+
+  <div class="arrow-button arrow-left" onclick="prevStep()">←</div>
+  <div class="arrow-button arrow-right" onclick="nextStep()">→</div>
+
+  <div class="content-container">
+    <div id="step0" class="content active fade-in">
+      <h2>Welcome</h2>
+      <p>This guide will walk you through building and wiring a compact robot step-by-step. Use the arrows or numbered navigation to move between stages. At any time, you can scroll within a step to see more detailed instructions and images.</p>
+      <p><strong>What you'll need:</strong> various tools, fasteners, and your robot kit components. Refer to each step to see exact parts and diagrams.</p>
+      <p>When you're ready, click the arrow to begin with the first assembly step.</p>
+    </div>
+
+    <div id="step1" class="content">
+      <h2>Step 1: Wheel and Motor Assembly</h2>
+      <img src="img/Wheel Sub-assembly Animation.gif" alt="Wheel Assembly Animation">
+      <p>Mount the motor to the bracket using two M3 screws. Secondly, press in two M3 Square nuts (if they aren't already in place). Finally, press the wheel onto the motor shaft.</p>
+      <img src="img/Left Wheel Assembly Exploded (View 1).png" alt="Exploded view of wheel and motor assembly view 1">
+      <img src="img/Left Wheel Assembly Exploded (View 2).png" alt="Exploded view of wheel and motor assembly view 2">
+      <p><strong>Tip:</strong> The other motor assembly should be the MIRROR of the first you make; ensure the bracket and wheel get placed on the opposite side of the motor.</p>
+    </div>
+
+    <div id="step2" class="content">
+      <h2>Step 2: Ultrasonic Sensor Assembly</h2>
+      <p>Insert the ultrasonic sensor into the sensor mount. Make sure both "eyes" face outward and the sensor is pressed in as far as it can go.</p>
+      <img src="img/Ultrasonic Sub-assembly Animation.gif" alt="Ultrasonic sensor Exploded view of ultrasonic sensor assembly">
+      <img src="img/Ultrasonic Sensor Assembly Exploded.png" alt="Ultrasonic sensor animation">
+      <p><strong>Note:</strong> The sensor only fits one way—check pin orientation before proceeding.</p>
+    </div>
+
+    <div id="step3" class="content">
+      <h2>Step 3: Front Skid and QTI Sensor Array Assembly</h2>
+      <p>Attach the QTI reflectance sensor board to the bottom of the front skid using four small standoffs. Then, mount the entire skid assembly to the front of the robot chassis.</p>
+      <img src="img/Front Skid and QRE Array Exploded.png" alt="Exploded view of skid and sensor array">
+      <img src="img/Skid and Sensor Array Assembly Animation.gif" alt="Skid Sensor Array Sensor Animation">
+      <p><strong>Reminder:</strong> Route the QTI wires upward through the slots in the chassis for easy connection later.</p>
+    </div>
+
+    <div id="step4" class="content">
+      <h2>Step 4: Main Assembly</h2>
+      <ol>
+        <li>Add left and right wheel assemblies to the main chassis plate.</li>
+        <img src="img/Main Build Step 01- Add Wheel Assemblies.png" alt="Step 01 - Add Wheel Assemblies">
+        <li>Secure the Crickit board using M3 spacers and screws.</li>
+        <img src="img/Main Build Step 02 - Add Crickit Board.png" alt="Step 02 - Attach Crickit Board">
+        <li>Attach the front skid with QTI sensor as shown previously.</li>
+        <img src="img/Main Build Step 03 - Front Skid and QRE Array.png" alt="Step 03 - Attach Front Skid and QTI Sensor Array">
+        <li>Mount the battery holder centrally between the wheel brackets.</li>
+        <img src="img/Main Build Step 04 - Battery Holder.png" alt="Step 04 - Attach Battery Holder">
+        <li>Insert the ultrasonic sensor into its slots on the front face.</li>
+        <img src="img/Main Build Step 5 - Ultrasonic Sensors.png" alt="Step 05 - Connect Ultrasonic Sensor Assemblies">
+        <li>Attach the neopixel strip and snap-fit the bracket in place.</li>
+        <img src="img/Main Build Step 6 - Neopixel and Brackets.png" alt="Step 06 - Add Neopixel Lights">
+        <li>Finally, plug in the Micro:bit into the Crickit edge connector.</li>
+        <img src="img/Main Build Step 7 - Add Microbit.png" alt="Step 07 - Plug Micro:bit into Crickit Board">
+      </ol>
+      <img src="img/Full Exploded View Turntable.gif" alt="Full Assembly Exploded Animation">
+      <img src="img/Full Assembly Animation.gif" alt="Full Assembly Animation">
+      <p><strong>Check:</strong> All connectors and mounting points should be snug but not over-tightened.</p>
+    </div>
+
+    <div id="step5" class="content">
+      <h2>Step 5: Wiring</h2>
+      <p>Connect each component using the provided jumper wires and screw terminals. Below is a list of pin assignments to follow:</p>
+      <ul>
+        <li>QTI Sensor: A0 - A3</li>
+        <li>Ultrasonic Sensor: Trigger - A4, Echo - A5</li>
+        <li>Neopixel Strip: Signal - A1</li>
+        <li>Motors: Crickit Motor 1 & 2</li>
+        <li>Battery: JST-PH to Crickit Power Input</li>
+      </ul>
+      <img src="wiring-placeholder.png" alt="Wiring diagram placeholder">
+      <p><strong>Hint:</strong> Use color-coded wires where possible to avoid confusion during troubleshooting.</p>
+    </div>
+  </div>
+
+  <div class="nav">
+    <div>
+      <a href="#" class="active" onclick="showStep(0)">0</a>
+      <div class="nav-label">Overview</div>
+    </div>
+    <div>
+      <a href="#" onclick="showStep(1)">1</a>
+      <div class="nav-label">Wheels</div>
+    </div>
+    <div>
+      <a href="#" onclick="showStep(2)">2</a>
+      <div class="nav-label">Ultrasonic</div>
+    </div>
+    <div>
+      <a href="#" onclick="showStep(3)">3</a>
+      <div class="nav-label">Front Skid</div>
+    </div>
+    <div>
+      <a href="#" onclick="showStep(4)">4</a>
+      <div class="nav-label">Main Build</div>
+    </div>
+    <div>
+      <a href="#" onclick="showStep(5)">5</a>
+      <div class="nav-label">Wiring</div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 0;
+
+    function showStep(stepNum) {
+      if (stepNum === currentStep) return;
+      const previous = document.getElementById('step' + currentStep);
+      const next = document.getElementById('step' + stepNum);
+      previous.classList.remove('active', 'fade-in');
+      setTimeout(() => {
+        next.classList.add('active');
+        requestAnimationFrame(() => next.classList.add('fade-in'));
+      }, 50);
+      currentStep = stepNum;
+      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+      document.querySelectorAll('.nav a')[stepNum].classList.add('active');
+    }
+
+    function nextStep() {
+      if (currentStep < 5) {
+        showStep(currentStep + 1);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        showStep(currentStep - 1);
+      }
+    }
+  </script>
+</body>
+</html>
