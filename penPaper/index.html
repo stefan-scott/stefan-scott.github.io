@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Practice Editor</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #f5f5f5;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Container that defines the visible editor area */
+    #editor-container {
+      width: 90vw;            /* nearly full width */
+      height: 90vh;           /* nearly full height */
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      background: white;
+      overflow: hidden;       /* keep internal scroll clean */
+    }
+
+    /* CodeMirror editor layout */
+    .cm-editor {
+      height: 100%;           /* fill container vertically */
+      width: 100%;
+      font-size: 16px;
+    }
+
+    /* Allow scrolling inside the editor when content exceeds height */
+    .cm-scroller {
+      overflow: auto !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="editor-container">
+    <div id="editor"></div>
+  </div>
+
+  <script type="module">
+    import { EditorView, basicSetup } from "https://cdn.jsdelivr.net/npm/@codemirror/basic-setup@0.20.0/+esm";
+    import { EditorState } from "https://cdn.jsdelivr.net/npm/@codemirror/state@0.20.0/+esm";
+    import { javascript } from "https://cdn.jsdelivr.net/npm/@codemirror/lang-javascript@0.20.0/+esm";
+
+    const startCode = `// Type your JavaScript here`;
+
+    const state = EditorState.create({
+      doc: startCode,
+      extensions: [
+        basicSetup,
+        javascript({ jsx: true })
+      ]
+    });
+
+    const view = new EditorView({
+      state,
+      parent: document.getElementById('editor')
+    });
+  </script>
+</body>
+</html>
