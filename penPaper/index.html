@@ -1,75 +1,79 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Quickstart Example 1</title>
-  <link rel="icon" href="data:;base64,=">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Practice Editor</title>
   <style>
     html, body {
-      margin: 0;
       height: 100%;
-      background-color: #2e2e2e; /* darker mid gray background */
+      margin: 0;
+      background: #2e2e2e;
+      font-family: monospace;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    /* Container for the editor */
-    #editor {
+    #editor-container {
       width: 85vw;
       height: 85vh;
-      background-color: #3a3a3a; /* editor container slightly lighter gray */
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      background: #3a3a3a;
       overflow: hidden;
     }
 
-    /* CodeMirror editor fills its container */
     .cm-editor {
       height: 100%;
       width: 100%;
-      font-family: monospace;
-      font-size: 15px;
+      font-size: 16px;
     }
 
-    /* Optional: tweak default CodeMirror theme colors for dark background */
     .cm-content {
-      background-color: #999999;
+      background-color: #3a3a3a;
       color: #eee;
+    }
+
+    .cm-scroller {
+      overflow: auto !important;
     }
   </style>
 </head>
-
 <body>
-  <div id="editor"></div>
+  <div id="editor-container">
+    <div id="editor"></div>
+  </div>
 
-  <script src="dist/cm6.bundle.js"></script>
-  <script>
-    const { createEditorState, createEditorView } = cm6;
-
-    // Minimal extensions without autocomplete
+  <script type="module">
+    import { EditorState } from "https://cdn.jsdelivr.net/npm/@codemirror/state@6.5.2/+esm";
+    import { EditorView, keymap, lineNumbers } from "https://cdn.jsdelivr.net/npm/@codemirror/view@6.36.4/+esm";
+    import { javascript } from "https://cdn.jsdelivr.net/npm/@codemirror/lang-javascript@6.2.4/+esm";
+    import { history, historyKeymap } from "https://cdn.jsdelivr.net/npm/@codemirror/commands@6.8.1/+esm";
+  
+    const startCode = `// Type your JavaScript here
+  function hello() {
+      console.log("Hello World");
+  }`;
+  
     const extensions = [
-      cm6.lineNumbers ? cm6.lineNumbers() : null,
-      cm6.highlightActiveLine ? cm6.highlightActiveLine() : null,
-      cm6.highlightActiveLineGutter ? cm6.highlightActiveLineGutter() : null,
-      cm6.history ? cm6.history() : null,
-      cm6.defaultHighlightStyle ? cm6.defaultHighlightStyle : null,
-      cm6.bracketMatching ? cm6.bracketMatching() : null,
-      cm6.closeBrackets ? cm6.closeBrackets() : null,
-      cm6.keymap ? cm6.keymap : null
-      // do NOT include autocomplete
-    ].filter(Boolean); // remove nulls
-
-    const initialState = createEditorState("", { extensions });
-
-    const view = createEditorView(initialState, document.getElementById("editor"));
-
-    // Optional: programmatically insert a comment
-    view.dispatch({
-      changes: { from: 0, insert: "// Create your solution here.\n" }
+      lineNumbers(),                 // now imported correctly
+      keymap.of(historyKeymap),
+      history(),
+      javascript({ jsx: true })
+      // no autocomplete
+    ];
+  
+    const state = EditorState.create({
+      doc: startCode,
+      extensions
+    });
+  
+    const view = new EditorView({
+      state,
+      parent: document.getElementById('editor')
     });
   </script>
+  
 </body>
-
 </html>
