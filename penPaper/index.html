@@ -1,68 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Practice Editor</title>
+  <meta charset="utf-8">
+  <title>Quickstart Example 1</title>
+  <link rel="icon" href="data:;base64,=">
   <style>
     html, body {
-      height: 100%;
       margin: 0;
-      background: #f5f5f5;
-      font-family: monospace;
+      height: 100%;
+      background-color: #2e2e2e; /* darker mid gray background */
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    /* Container that defines the visible editor area */
-    #editor-container {
-      width: 90vw;            /* nearly full width */
-      height: 90vh;           /* nearly full height */
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-      background: white;
-      overflow: hidden;       /* keep internal scroll clean */
+    /* Container for the editor */
+    #editor {
+      width: 85vw;
+      height: 85vh;
+      background-color: #3a3a3a; /* editor container slightly lighter gray */
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
     }
 
-    /* CodeMirror editor layout */
+    /* CodeMirror editor fills its container */
     .cm-editor {
-      height: 100%;           /* fill container vertically */
+      height: 100%;
       width: 100%;
-      font-size: 16px;
+      font-family: monospace;
+      font-size: 15px;
     }
 
-    /* Allow scrolling inside the editor when content exceeds height */
-    .cm-scroller {
-      overflow: auto !important;
+    /* Optional: tweak default CodeMirror theme colors for dark background */
+    .cm-content {
+      background-color: #999999;
+      color: #eee;
     }
   </style>
 </head>
+
 <body>
-  <div id="editor-container">
-    <div id="editor"></div>
-  </div>
+  <div id="editor"></div>
 
-  <script type="module">
-    import { EditorView, basicSetup } from "https://cdn.jsdelivr.net/npm/@codemirror/basic-setup@0.20.0/+esm";
-    import { EditorState } from "https://cdn.jsdelivr.net/npm/@codemirror/state@0.20.0/+esm";
-    import { javascript } from "https://cdn.jsdelivr.net/npm/@codemirror/lang-javascript@0.20.0/+esm";
+  <script src="../dist/cm6.bundle.js"></script>
+  <script>
+    const { createEditorState, createEditorView } = cm6;
 
-    const startCode = `// Type your JavaScript here`;
+    // Minimal extensions without autocomplete
+    const extensions = [
+      cm6.lineNumbers ? cm6.lineNumbers() : null,
+      cm6.highlightActiveLine ? cm6.highlightActiveLine() : null,
+      cm6.highlightActiveLineGutter ? cm6.highlightActiveLineGutter() : null,
+      cm6.history ? cm6.history() : null,
+      cm6.defaultHighlightStyle ? cm6.defaultHighlightStyle : null,
+      cm6.bracketMatching ? cm6.bracketMatching() : null,
+      cm6.closeBrackets ? cm6.closeBrackets() : null,
+      cm6.keymap ? cm6.keymap : null
+      // do NOT include autocomplete
+    ].filter(Boolean); // remove nulls
 
-    const state = EditorState.create({
-      doc: startCode,
-      extensions: [
-        basicSetup,
-        javascript({ jsx: true })
-      ]
-    });
+    const initialState = createEditorState("", { extensions });
 
-    const view = new EditorView({
-      state,
-      parent: document.getElementById('editor')
+    const view = createEditorView(initialState, document.getElementById("editor"));
+
+    // Optional: programmatically insert a comment
+    view.dispatch({
+      changes: { from: 0, insert: "// Create your solution here.\n" }
     });
   </script>
 </body>
+
 </html>
