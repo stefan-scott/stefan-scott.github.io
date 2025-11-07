@@ -2,7 +2,7 @@
 <html>
   <!--
   /*******************************************************************************
-   * CodeMirror Bundle - JS
+   * CodeMirror Bundle - XML
    * Copyright © 2023 Italo Osorio
    * http://silk.oopsclick.com
    *
@@ -29,20 +29,28 @@
   <head>
       <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=" >
       <link rel="stylesheet" href="editor.css">
-      <script src="../dist/jseditor.js"></script>
+      <script src="../dist/xmleditor.js"></script>
       <script src="editor.js"></script>
   </head>
 
   <body>
 
-    
+    <h2>CodeMirror - XML Editor Sample</h2>
+    <div id="bar" >
+    </div>
 
-    <div id="editor">//Build your solution here.</div>
+    <div id="editor"><? xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<data>
+    <person id="A154" age="35" >Peter</person>
+</data></div>
 
   	<script>
-  		var editor = new JSEditor("editor");
+  		var editor = new XmlEditor("editor");
       fillBar();
   	</script>
 
   </body>
+</html>
+
+
 </html>
