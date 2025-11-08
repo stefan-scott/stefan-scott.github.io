@@ -1,8 +1,8 @@
 /* Set editor dimensions */
 #editor {
 		font-size: 1.2em;
-		height: 300px;
-		width: 100%;
+		height: 90%;
+		width: 90%;
 }
 
 /* Stretch editor to fit inside its containing div */
