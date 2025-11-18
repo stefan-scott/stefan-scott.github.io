@@ -1,0 +1,31 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>code-box</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <header>
+    <p class="hint">Write your solution here, then copy/paste your code into the question on Canvas.</p>
+  </header>
+
+  <main>
+    <div class="editor-container">
+      <!-- Fallback textarea editor with line-number gutter. -->
+      <div class="gutter" id="gutter"></div>
+      <textarea id="editor" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Write your code here..."></textarea>
+    </div>
+
+    <div class="controls">
+      <button id="copyBtn">Copy Code</button>
+      <span id="status" role="status" aria-live="polite"></span>
+    </div>
+  </main>
+
+  <script src="static/main.js"></script>
+
+</body>
+</html>

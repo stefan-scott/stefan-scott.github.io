@@ -1,0 +1,24 @@
+:root{
+  --bg: #ffffff;
+  --fg: #111827;
+  --muted: #6b7280;
+  --accent: #2563eb;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+body{background:var(--bg);color:var(--fg);display:flex;flex-direction:column}
+header{padding:16px 20px;border-bottom:1px solid #eee}
+.hint{margin:4px 0 0;color:var(--muted);font-size:0.9rem}
+main{flex:1;display:flex;flex-direction:column;padding:12px 20px}
+.editor-container{flex:1;display:flex;min-height:320px;border:1px solid #ddd;border-radius:6px;overflow:hidden}
+.gutter{width:3em;background:#f3f4f6;border-right:1px solid #ddd;padding:16px 8px;overflow:hidden;text-align:right;font-size:14px;line-height:1.5;font-family:SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace;color:#999;white-space:pre}
+#editor{flex:1;resize:none;padding:16px;font-size:14px;line-height:1.5;border:none;background:#fafafa;outline:none;margin:0}
+/* Monospace font for code */
+#editor{font-family:SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace}
+/* Prefer tabs visible width */
+#editor{tab-size:4;-moz-tab-size:4}
+.controls{display:flex;align-items:center;gap:12px;padding-top:12px}
+button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:6px;cursor:pointer}
+button:active{transform:translateY(1px)}
+#status{color:var(--muted);font-size:0.95rem}
+footer{padding:10px 20px;border-top:1px solid #eee;color:var(--muted);font-size:12px}
