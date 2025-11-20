@@ -23,22 +23,22 @@ let pagesList = [];
 function pagePreLoad() {
     //preload()
     if (!gameSaved) {
-        pagesContent[0].push((loadImage('/assets/images/splbk/healthSpell.png')));
-        pagesContent[1].push((loadImage('/assets/images/splbk/shieldSpell.png')));
-        pagesContent[2].push((loadImage('/assets/images/splbk/swordSpell.png')));
-        pagesContent[3].push((loadImage('/assets/images/splbk/memorySpell.png')));
-        pagesContent[4].push((loadImage('/assets/images/splbk/speedSpell.png')));
+        pagesContent[0].push((loadImage('assets/images/splbk/healthSpell.png')));
+        pagesContent[1].push((loadImage('assets/images/splbk/shieldSpell.png')));
+        pagesContent[2].push((loadImage('assets/images/splbk/swordSpell.png')));
+        pagesContent[3].push((loadImage('assets/images/splbk/memorySpell.png')));
+        pagesContent[4].push((loadImage('assets/images/splbk/speedSpell.png')));
     }
 }
 
 function pageSetup() {
     // setup()
     if (!gameSaved) {
-        pagesList.push(new Pages('Page', loadImage('/assets/images/trinkets/pages/page.png'), 'HeatlhSpell', 40, height - 10, 1, 1, pagesContent[0]));
-        pagesList.push(new Pages('Page', loadImage('/assets/images/trinkets/pages/page.png'), 'ShieldSpell', width - width / 6, height - height / 6 + 20, 2, 1, pagesContent[1]));
-        pagesList.push(new Pages('Page', loadImage('/assets/images/trinkets/pages/page.png'), 'SwordSpell', width / 6, height - height / 6 + 10, 2, 2, pagesContent[2]));
-        pagesList.push(new Pages('Page', loadImage('/assets/images/trinkets/pages/page.png'), 'MemorySpell', width - width / 3 + 5, height - height / 4.5 + 5, 3, 1, pagesContent[3]));
-        pagesList.push(new Pages('Page', loadImage('/assets/images/trinkets/pages/page.png'), 'SpeedSpell', width / 3 + 20, 2 * (height / 3), 3, 1, pagesContent[4]));
+        pagesList.push(new Pages('Page', loadImage('assets/images/trinkets/pages/page.png'), 'HeatlhSpell', 40, height - 10, 1, 1, pagesContent[0]));
+        pagesList.push(new Pages('Page', loadImage('assets/images/trinkets/pages/page.png'), 'ShieldSpell', width - width / 6, height - height / 6 + 20, 2, 1, pagesContent[1]));
+        pagesList.push(new Pages('Page', loadImage('assets/images/trinkets/pages/page.png'), 'SwordSpell', width / 6, height - height / 6 + 10, 2, 2, pagesContent[2]));
+        pagesList.push(new Pages('Page', loadImage('assets/images/trinkets/pages/page.png'), 'MemorySpell', width - width / 3 + 5, height - height / 4.5 + 5, 3, 1, pagesContent[3]));
+        pagesList.push(new Pages('Page', loadImage('assets/images/trinkets/pages/page.png'), 'SpeedSpell', width / 3 + 20, 2 * (height / 3), 3, 1, pagesContent[4]));
     }
     else {
         // retrive info if game saved

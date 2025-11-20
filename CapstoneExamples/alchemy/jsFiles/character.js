@@ -16,19 +16,19 @@ let starved = false;  //for an ending
 function charPreLoad() {
   // preload()
   for (let i = 1; i <= 22; i++) {
-    charImgs[0].push(loadImage("/assets/images/characters/idle/" + i + ".png"));
+    charImgs[0].push(loadImage("assets/images/characters/idle/" + i + ".png"));
   }
   for (let i = 1; i <= 4; i++) {
-    charImgs[1].push(loadImage("/assets/images/characters/walk/" + i + ".png"));
+    charImgs[1].push(loadImage("assets/images/characters/walk/" + i + ".png"));
   }
   for (let i = 1; i <= 8; i++) {
-    charImgs[2].push(loadImage("/assets/images/characters/run/" + i + ".png"));
+    charImgs[2].push(loadImage("assets/images/characters/run/" + i + ".png"));
   }
   for (let i = 1; i <= 8; i++) {
-    charImgs[3].push(loadImage("/assets/images/characters/jump/" + i + ".png"));
+    charImgs[3].push(loadImage("assets/images/characters/jump/" + i + ".png"));
   }
   for (let i = 1; i <= 3; i++) {
-    charImgs[4].push(loadImage("/assets/images/characters/dead/" + i + ".png"));
+    charImgs[4].push(loadImage("assets/images/characters/dead/" + i + ".png"));
   }
 }
 

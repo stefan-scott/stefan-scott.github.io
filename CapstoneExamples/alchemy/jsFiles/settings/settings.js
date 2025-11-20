@@ -12,7 +12,7 @@ let volumeSlider;
 
 function settingsPreLoad() {
     // preload()
-    settingIcon = loadImage('/assets/images/settings/settingsIcon.png')
+    settingIcon = loadImage('assets/images/settings/settingsIcon.png')
 }
 
 

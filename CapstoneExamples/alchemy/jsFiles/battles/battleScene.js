@@ -22,18 +22,18 @@ let monsterList = [];
 
 function batPreLoad() {
     // preload()
-    heartFull = loadImage('/assets/images/battle/heartFull.png');
-    heartHalf = loadImage('/assets/images/battle/heartHalf.png');
-    heartLost = loadImage('/assets/images/battle/heartLost.png');
+    heartFull = loadImage('assets/images/battle/heartFull.png');
+    heartHalf = loadImage('assets/images/battle/heartHalf.png');
+    heartLost = loadImage('assets/images/battle/heartLost.png');
 
     if (!gameSaved) {
-        monsterImgs.push(loadImage('/assets/images/battle/monsters/blobMonster1.png'));
-        monsterImgs.push(loadImage('/assets/images/battle/monsters/flyMonster2.png'));
-        monsterImgs.push(loadImage('/assets/images/battle/monsters/bookwormMonster3.png'));
+        monsterImgs.push(loadImage('assets/images/battle/monsters/blobMonster1.png'));
+        monsterImgs.push(loadImage('assets/images/battle/monsters/flyMonster2.png'));
+        monsterImgs.push(loadImage('assets/images/battle/monsters/bookwormMonster3.png'));
 
-        battleBgImgs.push(loadImage('/assets/images/battle/battleBgSet1.png'));
-        battleBgImgs.push(loadImage('/assets/images/battle/battleBgSet2.png'));
-        battleBgImgs.push(loadImage('/assets/images/battle/battleBgSet3.png'));
+        battleBgImgs.push(loadImage('assets/images/battle/battleBgSet1.png'));
+        battleBgImgs.push(loadImage('assets/images/battle/battleBgSet2.png'));
+        battleBgImgs.push(loadImage('assets/images/battle/battleBgSet3.png'));
     }
 }
 

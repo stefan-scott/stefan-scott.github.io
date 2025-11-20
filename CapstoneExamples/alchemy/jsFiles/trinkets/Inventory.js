@@ -12,10 +12,10 @@ let invIconClose;
 
 function invPreLoad() {
     // preload()
-    invArrow = loadImage('/assets/images/inv/arrow.png');
-    invBox = loadImage('/assets/images/inv/box.png');
-    invIconClose = loadImage('/assets/images/inv/invClose.png');
-    invIconOpen = loadImage('/assets/images/inv/invOpen.png');
+    invArrow = loadImage('assets/images/inv/arrow.png');
+    invBox = loadImage('assets/images/inv/box.png');
+    invIconClose = loadImage('assets/images/inv/invClose.png');
+    invIconOpen = loadImage('assets/images/inv/invOpen.png');
 }
 
 function invSetup() {

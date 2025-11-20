@@ -6,9 +6,9 @@ let textBoxBg;
 let homeFont;
 
 function homePreLoad() {
-    homeBg = loadImage('/assets/images/set/home/set0.gif');
-    textBoxBg = loadImage('/assets/images/set/home/box.png');
-    homeFont = loadFont('/assets/fonts/MeltedMonster-ARPLA.ttf')
+    homeBg = loadImage('assets/images/set/home/set0.gif');
+    textBoxBg = loadImage('assets/images/set/home/box.png');
+    homeFont = loadFont('assets/fonts/MeltedMonster-ARPLA.ttf')
 }
 
 

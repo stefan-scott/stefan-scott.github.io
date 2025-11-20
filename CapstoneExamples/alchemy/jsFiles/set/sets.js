@@ -28,12 +28,12 @@ let setLeft;
 
 function setPreLoad() {
   if (!gameSaved) {
-    set[1][1].push(loadImage("/assets/images/set/set1_subSet1_chains1.png"));
-    set[2][1].push(loadImage("/assets/images/set/set2_subSet1_stairs1.png"));
-    set[2][2].push(loadImage("/assets/images/set/set2_subSet2_stairs2.png"));
-    set[3][1].push(loadImage("/assets/images/set/set3_subSet1_library1.png"));
-    set[3][2].push(loadImage("/assets/images/set/set3_subSet2_library2.png"));
-    set[3][3].push(loadImage("/assets/images/set/set3_subSet3_library3.png"));
+    set[1][1].push(loadImage("assets/images/set/set1_subSet1_chains1.png"));
+    set[2][1].push(loadImage("assets/images/set/set2_subSet1_stairs1.png"));
+    set[2][2].push(loadImage("assets/images/set/set2_subSet2_stairs2.png"));
+    set[3][1].push(loadImage("assets/images/set/set3_subSet1_library1.png"));
+    set[3][2].push(loadImage("assets/images/set/set3_subSet2_library2.png"));
+    set[3][3].push(loadImage("assets/images/set/set3_subSet3_library3.png"));
   }
 }
 

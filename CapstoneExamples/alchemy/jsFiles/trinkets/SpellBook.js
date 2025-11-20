@@ -11,10 +11,10 @@ let splbkIconOpen;
 
 function splbkPreLoad() {
   // preload()
-  splbkIcon = loadImage('/assets/images/splbk/book.png');
-  splbkArrow = loadImage('/assets/images/splbk/arrow.png');
-  splbkIconClose = loadImage('/assets/images/splbk/bookClose.png');
-  splbkIconOpen = loadImage('/assets/images/splbk/bookOpen.png');
+  splbkIcon = loadImage('assets/images/splbk/book.png');
+  splbkArrow = loadImage('assets/images/splbk/arrow.png');
+  splbkIconClose = loadImage('assets/images/splbk/bookClose.png');
+  splbkIconOpen = loadImage('assets/images/splbk/bookOpen.png');
 }
 
 function splbkSetup() {

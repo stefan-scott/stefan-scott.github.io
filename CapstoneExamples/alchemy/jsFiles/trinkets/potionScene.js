@@ -16,10 +16,10 @@ let drankMemorySpell = false;
 
 function potionPreLoad() {
     // preload()
-    potionBgImg = loadImage('/assets/images/potions/bg.png');
-    craftIconClose = loadImage('/assets/images/potions/craftIconClose.png');
+    potionBgImg = loadImage('assets/images/potions/bg.png');
+    craftIconClose = loadImage('assets/images/potions/craftIconClose.png');
     for (let i = 0; i <= 5; i++) {
-        craftIconOpen.push(loadImage("/assets/images/potions/craftIconOpen" + i + ".png"));
+        craftIconOpen.push(loadImage("assets/images/potions/craftIconOpen" + i + ".png"));
     }
 }
 
@@ -28,12 +28,12 @@ function potionSetup() {
     craftScreen = new CraftScene(width / 2, height / 2, potionBgImg);
     if (!gameSaved) {
         // the potions
-        potionsList.push(new Potions('SpellHealth', loadImage('/assets/images/potions/healthSpell.png'), 'Increase health by 50', ['Rice', 'Mushroom', 'Clover', 'Gold', 'Hibiscus'], healthFifteen)),
-            potionsList.push(new Potions('SpellShield', loadImage('/assets/images/potions/shieldSpell.png'), 'Increase shield protection by 30', ['Wood', 'Mushroom', 'Clover', 'Gold', 'Hibiscus'], shieldTen)),
-            potionsList.push(new Potions('SpellSword', loadImage('/assets/images/potions/swordSpell.png'), 'Increase attack by 30', ['Shard', 'Iron', 'Wood', 'Bone', 'Echinacea'], swordTen)),
-            potionsList.push(new Potions('SpellMemory', loadImage('/assets/images/potions/memorySpell.png'), 'You Must Remember', ['Clover', 'Mushroom', 'Iron', 'Honey', 'Bat', 'Dust'], remembered)),
-            potionsList.push(new Potions('SpellSpeed', loadImage('/assets/images/potions/speedSpell.png'), 'Walk faster', ['Sand', 'Eyeball', 'Gold', 'chemical', 'Blood', 'Clover'], speedUp)),
-            potionsList.push(new Potions('SpellConfusion', loadImage('/assets/images/potions/confusionSpell.png'), 'Mystery potion', ['Wood', 'Mushroom', 'Clover', 'Salamander', 'Bat'], die))
+        potionsList.push(new Potions('SpellHealth', loadImage('assets/images/potions/healthSpell.png'), 'Increase health by 50', ['Rice', 'Mushroom', 'Clover', 'Gold', 'Hibiscus'], healthFifteen)),
+            potionsList.push(new Potions('SpellShield', loadImage('assets/images/potions/shieldSpell.png'), 'Increase shield protection by 30', ['Wood', 'Mushroom', 'Clover', 'Gold', 'Hibiscus'], shieldTen)),
+            potionsList.push(new Potions('SpellSword', loadImage('assets/images/potions/swordSpell.png'), 'Increase attack by 30', ['Shard', 'Iron', 'Wood', 'Bone', 'Echinacea'], swordTen)),
+            potionsList.push(new Potions('SpellMemory', loadImage('assets/images/potions/memorySpell.png'), 'You Must Remember', ['Clover', 'Mushroom', 'Iron', 'Honey', 'Bat', 'Dust'], remembered)),
+            potionsList.push(new Potions('SpellSpeed', loadImage('assets/images/potions/speedSpell.png'), 'Walk faster', ['Sand', 'Eyeball', 'Gold', 'chemical', 'Blood', 'Clover'], speedUp)),
+            potionsList.push(new Potions('SpellConfusion', loadImage('assets/images/potions/confusionSpell.png'), 'Mystery potion', ['Wood', 'Mushroom', 'Clover', 'Salamander', 'Bat'], die))
     }
     else {
         potionInitiated = saved.get(potionInitiated);
