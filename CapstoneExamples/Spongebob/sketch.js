@@ -127,7 +127,7 @@ function preload() {
   jamImage = loadImage("./assets/5.PNG");
   rockImage = loadImage("./assets/rock.PNG");
   homeImage = loadImage("./assets/home.PNG");
-  shopImage = loadImage("./assets/shop.PNG");
+  shopImage = loadImage("./assets/Shop.PNG");
   shopCharacters = loadImage("./assets/shopCharacters.PNG");
   values = loadImage("./assets/values.PNG");
   notEnough = loadImage("./assets/notEnough.PNG");
