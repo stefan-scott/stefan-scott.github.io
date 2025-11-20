@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Menu</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- Linking to the main p5.js library, which allows your code to use all 
+       p5 functions. Using this version while developing your code allows p5 
+       to provide more Friendly Error Messages if you mess something up...-->
+    <script src="libraries/p5.js"></script>
+
+    <!-- Once your project is working completely, you can comment out the link
+       to p5.js above, and instead link to this minified version. The minified
+       version takes less space, and turns off Friendly Error Messages. This 
+       increases the speed of your program quite dramatically in some cases.-->
+    <!-- <script src="libraries/p5.min.js"></script> -->
+
+    <script src="libraries/p5.sound.min.js"></script>
+    <style>
+        button {
+          transform-origin: center;
+          display: inline-block;
+          padding: 15px 25px;
+          font-size: 24px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          outline: none;
+          color: #fff;
+          background-color: #007df1;
+          border: none;
+          border-radius: 15px;
+          box-shadow: 0 9px #999;
+          position: absolute;
+        }
+        .wrapper {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        }
+        .startButton {
+          top: 50%;
+        }
+        button:hover {background-color: #001574}
+      
+        button:active {
+          background-color: #010058;
+          box-shadow: 0 5px #666;
+          transform: translateY(4px);
+        }
+    </style>
+</head>
+  <body>
+    <div class="wrapper">
+        <button class="startButton" onclick="location.href='menu.html'">CLICK HERE TO START</button>
+    </div>
+  <script src="sketch.js">
+  </script>
+  </body>
+</html>
