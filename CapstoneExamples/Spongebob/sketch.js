@@ -121,16 +121,16 @@ let shop;
 
 function preload() {
   // images
-  bImage = loadImage("https://stefan-scott.github.io/CapstoneExamples/Spongebob/assets/backg1.png");
-  bImage2 = loadImage("./assets/backg2.png");
-  burgerImage = loadImage("./assets/4.png");
-  jamImage = loadImage("./assets/5.png");
-  rockImage = loadImage("./assets/rock.png");
-  homeImage = loadImage("./assets/home.png");
-  shopImage = loadImage("./assets/shop.png");
-  shopCharacters = loadImage("./assets/shopCharacters.png");
-  values = loadImage("./assets/values.png");
-  notEnough = loadImage("./assets/notEnough.png");
+  bImage = loadImage("https://stefan-scott.github.io/CapstoneExamples/Spongebob/assets/backg1.PNG");
+  bImage2 = loadImage("./assets/backg2.PNG");
+  burgerImage = loadImage("./assets/4.PNG");
+  jamImage = loadImage("./assets/5.PNG");
+  rockImage = loadImage("./assets/rock.PNG");
+  homeImage = loadImage("./assets/home.PNG");
+  shopImage = loadImage("./assets/shop.PNG");
+  shopCharacters = loadImage("./assets/shopCharacters.PNG");
+  values = loadImage("./assets/values.PNG");
+  notEnough = loadImage("./assets/notEnough.PNG");
 
   // sounds
   bubble = loadSound("./sounds/bigBubble.mp3");
@@ -147,45 +147,45 @@ function preload() {
 
   //spongebob animation
   for (let i = 0; i < 4; i++) {
-    sAnimation.push(loadImage("./assets/" + i + ".png"));
+    sAnimation.push(loadImage("./assets/" + i + ".PNG"));
   }
   //spongebob riding jellyFish animation
   for (let i = 0; i < 3; i++) {
-    jellyAnimation.push(loadImage("./assets/jellychar/" + i + ".png"));
+    jellyAnimation.push(loadImage("./assets/jellychar/" + i + ".PNG"));
   }
   //boss entrance animation
   for (let i = 0; i < 7; i++) {
-    startBoss.push(loadImage("./assets/villian/" + i + ".png"));
+    startBoss.push(loadImage("./assets/villian/" + i + ".PNG"));
   }
   //boss end animation
   for (let i = 6; i >= 0; i--) {
-    endBoss.push(loadImage("./assets/villian/" + i + ".png"));
+    endBoss.push(loadImage("./assets/villian/" + i + ".PNG"));
   }
   //boss moving animation
   for (let i = 6; i < 12; i++) {
-    bossAnimation.push(loadImage("./assets/villian/" + i + ".png"));
+    bossAnimation.push(loadImage("./assets/villian/" + i + ".PNG"));
   }
   //power ups
   for (let i = 0; i < 4; i++) {
-    double.push(loadImage("./assets/powerups/double" + i + ".png"));
+    double.push(loadImage("./assets/powerups/double" + i + ".PNG"));
   }
   for (let i = 0; i < 4; i++) {
-    magnet.push(loadImage("./assets/powerups/magnet" + i + ".png"));
+    magnet.push(loadImage("./assets/powerups/magnet" + i + ".PNG"));
   }
   for (let i = 0; i < 4; i++) {
-    shield.push(loadImage("./assets/powerups/shield" + i + ".png"));
+    shield.push(loadImage("./assets/powerups/shield" + i + ".PNG"));
   }
   // dying animation
   for (let i = 0; i < 5; i++) {
-    dying.push(loadImage("./assets/dying/" + i + ".png"));
+    dying.push(loadImage("./assets/dying/" + i + ".PNG"));
   }
   // dying animation
   for (let i = 0; i < 5; i++) {
-    dying2.push(loadImage("./assets/dying2/" + i + ".png"));
+    dying2.push(loadImage("./assets/dying2/" + i + ".PNG"));
   }
   // count down animation
   for (let i = 3; i > 0; i--) {
-    countDown.push(loadImage("./assets/count" + i + ".png"));
+    countDown.push(loadImage("./assets/count" + i + ".PNG"));
   }
 }
 
