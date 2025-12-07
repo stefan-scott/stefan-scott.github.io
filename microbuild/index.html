@@ -91,6 +91,9 @@
 
     <div id="step5" class="content">
       <h2>Step 5: Wiring</h2>
+      <p><i>For wiring, we'll use the crickit connections for Motors, Neopixel, and (optionally) servo.  For sensors, we'll aim to use the micro:bit edge pins 
+        <strong>instead</strong> of the crickit signal pins. This should reduce the likelihood of the cricit board locking up.</i></p>
+
 
       <h3>Left Motor</h3>
       <p>Motor 1 connections (screw terminal ×2)</p>
@@ -99,19 +102,33 @@
       <p>Motor 2 connections (screw terminal ×2)</p>
 
       <h3>Ultrasonic</h3>
-      <p><strong>DON'T WIRE</strong> this time — we need a different sensor type for the Micro:bit 3.3 V.</p>
+      <p>There are 3 Ultrasonics mounting spots. Wiring is as follows: </p>
+        <ul>
+        <li>all VCC and GND can be connected to the 3.3V and GND connections in the crickit signal block</li>
+        <li>Echo/Trig wiring <i>(to micro:bit edge pins):</i>
+          <ul>
+            <li><pre>LEFT:     <b>Echo:</b> 14   <b>Trig:</b> 15</pre></li>
+            <li><pre>CENTER:   <b>Echo:</b> 12   <b>Trig:</b> 13</pre></li>
+            <li><pre>RIGHT:    <b>Echo:</b> 14    <b>Trig:</b> 15</pre></li>
+          </ul>
+        </li>
+      
+      </ul>
+      <p></p>
 
       <h3>Line Sensors (Front Skid)</h3>
       <p>Each of the five sensor middle wires (OUT) will connect to the signal pins on the Crickit board. If you are looking at the skid from the front:</p>
       <ul>
-        <li>The leftmost OUT → signal 2</li>
-        <li>The middlemost OUT → signal 4</li>
-        <li>The rightmost OUT → signal 6</li>
+        <li><pre>The leftmost OUT        →     signal 6</pre></li>
+        <li><pre>The inner-left OUT      →     signal 5</pre></li>
+        <li><pre>The middlemost OUT      →     signal 4</pre></li>
+        <li><pre>The inner-right OUT     →     signal 3</pre></li>
+        <li><pre>The rightmost OUT       →     signal 2</pre></li>
       </ul>
       <p>All the <strong>GND</strong> connections on the sensors will connect to <strong>GND</strong> on the Crickit board using the 5-to-1 wire harness (black or brown).</p>
       <p>All the <strong>VCC</strong> connections on the sensors will connect to <strong>3.3 V</strong> on the Crickit board using the 5-to-1 wire harness (red).</p>
 
-      <img src="img/qre.webp" alt="Wiring diagram placeholder">
+      <img src="img/Car Circuit Main.png" alt="Wiring diagram placeholder">
       <p><strong>Hint:</strong> Use color-coded wires where possible to avoid confusion during troubleshooting.</p>
     </div>
   </div>
