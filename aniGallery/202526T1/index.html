@@ -44,14 +44,8 @@
         margin-bottom: 4px;
     }
 
-    .student:hover {
-        background: #444;
-    }
-
-    .active {
-        background: #00aaff;
-        font-weight: bold;
-    }
+    .student:hover { background: #444; }
+    .active { background: #00aaff; font-weight: bold; }
 
     /* Main content area */
     #main {
@@ -64,7 +58,6 @@
         padding: 20px;
     }
 
-    /* Media box */
     #media-container {
         max-width: 90%;
         max-height: 80%;
@@ -98,99 +91,154 @@
     #prev { left: 20px; }
     #next { right: 20px; }
 
-    .arrow:hover {
-        color: #000;
+    .arrow:hover { color: #000; }
+
+    /* Mobile name bar */
+    #mobile-bar {
+        display: none;
+        margin-top: 12px;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 18px;
+    }
+
+    #mobile-name {
+        cursor: pointer;
+        font-weight: bold;
+        text-align: center;
+        flex: 1;
+    }
+
+    #mobile-list {
+        display: none;
+        position: absolute;
+        bottom: 80px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        max-height: 200px;
+        overflow-y: auto;
+        width: 70%;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #mobile-list div {
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    #mobile-list div:hover { background: #eee; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        body { flex-direction: column; }
+        #sidebar { display: none; }
+        #media-container { max-width: 100%; max-height: none; }
+        .arrow { position: static; transform: none; }
+        #mobile-bar { display: flex; }
     }
 </style>
 </head>
 
 <body>
 
-<!-- Sidebar -->
 <div id="sidebar">
     <h1>Animation 10 Major Projects</h1>
     <h2>2025–26 T1</h2>
-
     <div id="student-list"></div>
 </div>
 
-<!-- Main content -->
 <div id="main">
     <div id="media-container"></div>
 
-    <div id="prev" class="arrow">&#10094;</div>
-    <div id="next" class="arrow">&#10095;</div>
+    <div id="mobile-bar">
+        <div id="prev" class="arrow">&#10094;</div>
+        <div id="mobile-name"></div>
+        <div id="next" class="arrow">&#10095;</div>
+    </div>
+
+    <div id="mobile-list"></div>
+
+    <div id="prev-desktop" class="arrow" style="left:20px">&#10094;</div>
+    <div id="next-desktop" class="arrow" style="right:20px">&#10095;</div>
 </div>
 
 <script>
-    // Placeholder student data — replace with real names + file paths
-    const projects = [
-        { name: "Babrik", file: "projects/babrik.mp4" },
-        { name: "Bella", file: "projects/bella.mp4" },
-        { name: "Conor", file: "projects/conor.gif" },
-        { name: "Eliza", file: "projects/eliza.mp4" },
-        { name: "Gustavo", file: "projects/gustavo.mp4" },
-        { name: "Liam", file: "projects/liam.mp4" },
-        { name: "Mok", file: "projects/mok.GIF" },
-        { name: "Rafae", file: "projects/rafae.mp4" },
-        { name: "Sahar", file: "projects/sahar.mp4" },
-        { name: "Tyler", file: "projects/tyler.mp4" }
-    ];
+const projects = [
+    { name: "Babrik", file: "projects/babrik.mp4" },
+    { name: "Bella", file: "projects/bella.mp4" },
+    { name: "Conor", file: "projects/conor.gif" },
+    { name: "Eliza", file: "projects/eliza.mp4" },
+    { name: "Gustavo", file: "projects/gustavo.mp4" },
+    { name: "Liam", file: "projects/liam.mp4" },
+    { name: "Mok", file: "projects/mok.GIF" },
+    { name: "Rafae", file: "projects/rafae.mp4" },
+    { name: "Sahar", file: "projects/sahar.mp4" },
+    { name: "Tyler", file: "projects/tyler.mp4" }
+];
 
-    let currentIndex = 0;
+let currentIndex = 0;
 
-    const studentList = document.getElementById("student-list");
-    const mediaContainer = document.getElementById("media-container");
+const studentList = document.getElementById("student-list");
+const mediaContainer = document.getElementById("media-container");
+const mobileName = document.getElementById("mobile-name");
+const mobileList = document.getElementById("mobile-list");
 
-    // Build sidebar list
-    projects.forEach((p, index) => {
-        const div = document.createElement("div");
-        div.className = "student";
-        div.textContent = p.name;
-        div.onclick = () => loadProject(index);
-        studentList.appendChild(div);
-    });
+projects.forEach((p, index) => {
+    const div = document.createElement("div");
+    div.className = "student";
+    div.textContent = p.name;
+    div.onclick = () => loadProject(index);
+    studentList.appendChild(div);
 
-    function loadProject(index) {
-        currentIndex = index;
-        const project = projects[index];
+    const m = document.createElement("div");
+    m.textContent = p.name;
+    m.onclick = () => { loadProject(index); mobileList.style.display = "none"; };
+    mobileList.appendChild(m);
+});
 
-        // Clear old media
-        mediaContainer.innerHTML = "";
+function loadProject(index) {
+    currentIndex = index;
+    const project = projects[index];
+    mediaContainer.innerHTML = "";
 
-        // Highlight active student
-        [...studentList.children].forEach((el, i) => {
-            el.classList.toggle("active", i === index);
-        });
+    [...studentList.children].forEach((el, i) => el.classList.toggle("active", i === index));
 
-        // Determine file type
-        const ext = project.file.split(".").pop().toLowerCase();
+    mobileName.textContent = project.name;
 
-        if (ext === "mp4") {
-            const video = document.createElement("video");
-            video.src = project.file;
-            video.controls = true;
-            mediaContainer.appendChild(video);
-        } else {
-            const img = document.createElement("img");
-            img.src = project.file;
-            mediaContainer.appendChild(img);
-        }
+    const ext = project.file.split(".").pop().toLowerCase();
+
+    if (ext === "mp4") {
+        const video = document.createElement("video");
+        video.src = project.file;
+        video.controls = true;
+        mediaContainer.appendChild(video);
+    } else {
+        const img = document.createElement("img");
+        img.src = project.file;
+        mediaContainer.appendChild(img);
     }
+}
 
-    // Arrow navigation
-    document.getElementById("prev").onclick = () => {
-        currentIndex = (currentIndex - 1 + projects.length) % projects.length;
-        loadProject(currentIndex);
-    };
+function prev() {
+    loadProject((currentIndex - 1 + projects.length) % projects.length);
+}
 
-    document.getElementById("next").onclick = () => {
-        currentIndex = (currentIndex + 1) % projects.length;
-        loadProject(currentIndex);
-    };
+function next() {
+    loadProject((currentIndex + 1) % projects.length);
+}
 
-    // Load first project on startup
-    loadProject(0);
+document.getElementById("prev").onclick = prev;
+document.getElementById("next").onclick = next;
+document.getElementById("prev-desktop").onclick = prev;
+document.getElementById("next-desktop").onclick = next;
+
+mobileName.onclick = () => {
+    mobileList.style.display = mobileList.style.display === "block" ? "none" : "block";
+};
+
+loadProject(0);
 </script>
 
 </body>
