@@ -14,7 +14,7 @@
         background: #f5f5f5;
     }
 
-    /* Desktop sidebar */
+    /* Left sidebar */
     #sidebar {
         width: 180px;
         background: #222;
@@ -47,7 +47,7 @@
     .student:hover { background: #444; }
     .active { background: #00aaff; font-weight: bold; }
 
-    /* Main content */
+    /* Main content area */
     #main {
         flex-grow: 1;
         display: flex;
@@ -77,8 +77,8 @@
         border-radius: 6px;
     }
 
-    /* Desktop arrows */
-    .arrow-desktop {
+    /* Navigation arrows */
+    .arrow {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -88,12 +88,12 @@
         color: #555;
     }
 
-    #prev-desktop { left: 20px; }
-    #next-desktop { right: 20px; }
+    #prev { left: 20px; }
+    #next { right: 20px; }
 
-    .arrow-desktop:hover { color: #000; }
+    .arrow:hover { color: #000; }
 
-    /* Mobile bar */
+    /* Mobile name bar */
     #mobile-bar {
         display: none;
         margin-top: 12px;
@@ -130,50 +130,46 @@
 
     #mobile-list div:hover { background: #eee; }
 
-    /* Mobile arrows */
-    .arrow-mobile {
-        font-size: 40px;
-        cursor: pointer;
-        user-select: none;
-        color: #555;
-    }
-
-    /* Responsive: MOBILE MODE */
+    /* Responsive */
     @media (max-width: 768px) {
         body { flex-direction: column; }
         #sidebar { display: none; }
-        #mobile-bar { display: flex; }
-        #prev-desktop, #next-desktop { display: none; }
         #media-container { max-width: 100%; max-height: none; }
+        .arrow { position: static; transform: none; }
+        #mobile-bar { display: flex; }
+
+        /* Hide desktop arrows on mobile */
+        #prev-desktop, #next-desktop { display: none; }
+    }
+        #sidebar { display: none; }
+        #media-container { max-width: 100%; max-height: none; }
+        .arrow { position: static; transform: none; }
+        #mobile-bar { display: flex; }
     }
 </style>
 </head>
 
 <body>
 
-<!-- Desktop Sidebar -->
 <div id="sidebar">
     <h1>Animation 10 Major Projects</h1>
     <h2>2025–26 T1</h2>
     <div id="student-list"></div>
 </div>
 
-<!-- Main Content -->
 <div id="main">
     <div id="media-container"></div>
 
-    <!-- Mobile Navigation Bar -->
     <div id="mobile-bar">
-        <div id="prev-mobile" class="arrow-mobile">&#10094;</div>
+        <div id="prev" class="arrow">&#10094;</div>
         <div id="mobile-name"></div>
-        <div id="next-mobile" class="arrow-mobile">&#10095;</div>
+        <div id="next" class="arrow">&#10095;</div>
     </div>
 
     <div id="mobile-list"></div>
 
-    <!-- Desktop Arrows -->
-    <div id="prev-desktop" class="arrow-desktop">&#10094;</div>
-    <div id="next-desktop" class="arrow-desktop">&#10095;</div>
+    <div id="prev-desktop" class="arrow" style="left:20px">&#10094;</div>
+    <div id="next-desktop" class="arrow" style="right:20px">&#10095;</div>
 </div>
 
 <script>
@@ -203,13 +199,12 @@ const mediaContainer = document.getElementById("media-container");
 const mobileName = document.getElementById("mobile-name");
 const mobileList = document.getElementById("mobile-list");
 
-/* Build student lists (desktop + mobile) */
 projects.forEach((p, index) => {
-    const d = document.createElement("div");
-    d.className = "student";
-    d.textContent = p.name;
-    d.onclick = () => loadProject(index);
-    studentList.appendChild(d);
+    const div = document.createElement("div");
+    div.className = "student";
+    div.textContent = p.name;
+    div.onclick = () => loadProject(index);
+    studentList.appendChild(div);
 
     const m = document.createElement("div");
     m.textContent = p.name;
@@ -222,9 +217,7 @@ function loadProject(index) {
     const project = projects[index];
     mediaContainer.innerHTML = "";
 
-    [...studentList.children].forEach((el, i) =>
-        el.classList.toggle("active", i === index)
-    );
+    [...studentList.children].forEach((el, i) => el.classList.toggle("active", i === index));
 
     mobileName.textContent = project.name;
 
@@ -250,21 +243,15 @@ function next() {
     loadProject((currentIndex + 1) % projects.length);
 }
 
-/* Desktop arrows */
+document.getElementById("prev").onclick = prev;
+document.getElementById("next").onclick = next;
 document.getElementById("prev-desktop").onclick = prev;
 document.getElementById("next-desktop").onclick = next;
 
-/* Mobile arrows */
-document.getElementById("prev-mobile").onclick = prev;
-document.getElementById("next-mobile").onclick = next;
-
-/* Mobile dropdown toggle */
 mobileName.onclick = () => {
-    mobileList.style.display =
-        mobileList.style.display === "block" ? "none" : "block";
+    mobileList.style.display = mobileList.style.display === "block" ? "none" : "block";
 };
 
-/* Load first project */
 loadProject(0);
 </script>
 
