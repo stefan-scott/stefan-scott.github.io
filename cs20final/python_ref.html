@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 3 Quick Reference</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            margin: 5px 0;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.95rem;
+        }
+        /* Syntax highlighting for code comments */
+        .comment {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Python 3 Quick Reference</h1>
+
+    <h2>Variables</h2>
+    <pre>x = 5
+name = "Alice"
+is_valid = True</pre>
+
+    <h2>Type Conversion (Casting)</h2>
+    <pre><span class="comment"># Convert to integer</span>
+num1 = int("10")    <span class="comment"># 10</span>
+num2 = int(5.7)     <span class="comment"># 5 (truncates decimal)</span>
+
+<span class="comment"># Convert to float</span>
+pi = float("3.14")  <span class="comment"># 3.14</span>
+val = float(8)      <span class="comment"># 8.0</span>
+
+<span class="comment"># Convert to string</span>
+text = str(100)     <span class="comment"># "100"</span></pre>
+
+    <h2>User Input</h2>
+    <pre><span class="comment"># Reads input as a string</span>
+user_text = input("Enter text: ")
+
+<span class="comment"># Converts input to an integer for calculations</span>
+user_number = int(input("Enter a number: "))</pre>
+
+    <h2>Basic Math</h2>
+    <pre>addition = 5 + 3
+subtraction = 5 - 3
+multiplication = 5 * 3
+division = 5 / 3       <span class="comment"># Returns float (1.666...)</span>
+floor_division = 5 // 3 <span class="comment"># Returns int (1)</span>
+modulus = 5 % 3        <span class="comment"># Remainder (2)</span>
+exponent = 5 ** 3      <span class="comment"># Power (125)</span></pre>
+
+    <h2>Functions</h2>
+    <pre>def my_function(parameter1, parameter2):
+    result = parameter1 + parameter2
+    return result
+
+<span class="comment"># Calling a function</span>
+value = my_function(10, 20)</pre>
+
+    <h2>For Loops</h2>
+    <pre><span class="comment"># Loop from 0 up to (but not including) 5</span>
+for i in range(5):
+    print(i)
+
+<span class="comment"># Loop through list items</span>
+for item in my_list:
+    print(item)</pre>
+
+    <h2>While Loops</h2>
+    <pre>count = 0
+while count < 5:
+    print(count)
+    count = count + 1</pre>
+
+    <h2>Lists</h2>
+    <pre><span class="comment"># Create a list</span>
+numbers = [10, 20, 30, 40]
+
+<span class="comment"># Access item (indexing starts at 0)</span>
+first_item = numbers[0]
+
+<span class="comment"># Add item to the end</span>
+numbers.append(50)
+
+<span class="comment"># Get length of list</span>
+total_items = len(numbers)</pre>
+
+    <h2>Slicing (Lists &amp; Strings)</h2>
+    <pre><span class="comment"># syntax -> element[start:stop] (stop index is excluded)</span>
+items = [0, 1, 2, 3, 4, 5]
+text = "Python"
+
+<span class="comment"># Get elements from index 1 up to 4</span>
+sub_list = items[1:4]  <span class="comment"># [1, 2, 3]</span>
+sub_text = text[1:4]   <span class="comment"># "yth"</span>
+
+<span class="comment"># From start up to index 3</span>
+start_to_three = items[:3]  <span class="comment"># [0, 1, 2]</span>
+
+<span class="comment"># From index 2 to the end</span>
+two_to_end = items[2:]  <span class="comment"># [2, 3, 4, 5]</span></pre>
+
+</body>
+</html>
