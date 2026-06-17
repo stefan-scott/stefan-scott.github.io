@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS30: Fox Simulation Project</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #5a6578;
+            --accent: #3182ce;
+            --accent-hover: #2b6cb0;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .resource-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #1a202c;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 6px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 650px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .modal h2 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Computer Science 30</h1>
+            <p>Fox Simulation Project</p>
+            
+            <div class="resource-bar">
+                <a href="assets/fox_starter_project.zip" class="btn" style="background-color: #2b6cb0;">📥 Download Starter Files (ZIP)</a>
+                <a href="https://beta.p5js.org/reference/" target="_blank" class="btn" style="background-color: #4a5568;">🌐 p5.js Beta Reference ↗</a>
+            </div>
+        </header>
+
+        <!-- Base Features Section -->
+        <h2 class="section-title">Base Features</h2>
+        <div class="grid">
+            <div class="card">
+                <div>
+                    <h3>Basic Movement</h3>
+                    <p>Get the main fox moving around the screen using the WASD keys and facing the correct direction.</p>
+                </div>
+                <button class="btn" onclick="openModal('modal-movement')">Read Instructions</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h3>Size Shifting</h3>
+                    <p>Make the fox grow or shrink depending on where you click your mouse on the screen.</p>
+                </div>
+                <button class="btn" onclick="openModal('modal-sizeshift')">Read Instructions</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h3>Water is a Healthier Choice</h3>
+                    <p>Add a special mode where the fox moves on its own, changes size/colors, and resets when needed.</p>
+                </div>
+                <button class="btn" onclick="openModal('modal-pepsi')">Read Instructions</button>
+            </div>
+        </div>
+
+        <!-- Challenge Features Section -->
+        <h2 class="section-title">Expert Challenge Features</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+            <div class="card">
+                <div>
+                    <h3>Silky Smooth</h3>
+                    <p>Turn the static movement into an animated loop by flipping through the available array images.</p>
+                </div>
+                <button class="btn" onclick="openModal('modal-smooth')">Read Instructions</button>
+            </div>
+            <div class="card">
+                <div>
+                    <h3>A Few More Foxes</h3>
+                    <p>Add random-walking computer foxes that automatically change color when the player gets too close.</p>
+                </div>
+                <button class="btn" onclick="openModal('modal-computerfox')">Read Instructions</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Basic Movement Modal -->
+    <div id="modal-movement" class="modal" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-movement')">&times;</span>
+            <h2>Basic Movement (Fox-base-feature-01.png)</h2>
+            <p>The fox is getting bored of staying in the same place all the time. <strong>Bind the WASD keys</strong> to the fox, allowing it to move up, left, down, and right respectively.</p>
+            <p>The fox should be displayed using the appropriate image so that it faces in the direction the fox is moving.</p>
+            <p><strong>Note:</strong> You only need to use a single image for each direction. Instead of using the old staticImages array, use the first image (at position 0) from each of these starter arrays:</p>
+            <ul>
+                <li><code>foxLeft</code></li>
+                <li><code>foxRight</code></li>
+                <li><code>foxUp</code></li>
+                <li><code>foxDown</code></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Size Shifting Modal -->
+    <div id="modal-sizeshift" class="modal" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-sizeshift')">&times;</span>
+            <h2>Size Shifting (Fox-base-feature-02.png)</h2>
+            <p>The fox changes size as well. Set up the canvas mouse clicks to do the following:</p>
+            <ul>
+                <li>When the mouse is clicked in the <strong>top half</strong> of the screen, the fox should get larger (the change should accumulate with each mouse click).</li>
+                <li>When the mouse is clicked in the <strong>bottom half</strong> of the screen, the fox should get smaller.</li>
+            </ul>
+            <p><strong>Hint:</strong> You may either use <code>scale()</code> on the entire coordinate system, or use extra width/height arguments inside the <code>image()</code> function.</p>
+        </div>
+    </div>
+
+    <!-- Pepsi Mode Modal -->
+    <div id="modal-pepsi" class="modal" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-pepsi')">&times;</span>
+            <h2>Water is a Healthier Choice (Fox-base-feature-03.png)</h2>
+            <p>Occasionally, the fox has a can of Pepsi. Whenever that happens, the fox begins to move around the screen in a pseudo-random way (not controlled by the user, or at least not fully), and <strong>constantly changes its size and color</strong> while doing so.</p>
+            <p>You can also make the fox faster if you like. Pressing the <strong>P key</strong> on the keyboard toggles Pepsi mode on/off.</p>
+            <p>Finally, the fox can be <strong>reset to its default settings</strong> (drawn in the middle of the screen with its initial size) by pressing the <strong>R key</strong> on the keyboard.</p>
+        </div>
+    </div>
+
+    <!-- Animation Modal -->
+    <div id="modal-smooth" class="modal" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-smooth')">&times;</span>
+            <h2>Silky Smooth (Fox-expert-feature-01.gif)</h2>
+            <p>Using a single image for each direction of movement can be improved by instead <strong>looping through the other 7 images</strong>.</p>
+            <p>Transition your work to be selecting the "next image to draw" from the correct animation array (<code>foxLeft</code>, <code>foxRight</code>, <code>foxUp</code>, <code>foxDown</code>), each of which contains 8 images for the sprite facing in that direction.</p>
+            <p>Eight images should be consistently looped (the ones associated with the last direction chosen by the user).</p>
+        </div>
+    </div>
+
+    <!-- Computer Fox Modal -->
+    <div id="modal-computerfox" class="modal" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-computerfox')">&times;</span>
+            <h2>A Few More Foxes (Fox-expert-feature-02.png)</h2>
+            <p>Time to add some computer-controlled foxes as well. For each fox:</p>
+            <ul>
+                <li>Move using a <strong>random-walker strategy</strong> (the current movement direction is randomly selected). Only change directions every so often (every 20-40 frames) to ensure the computer foxes have stable movement.</li>
+                <li>Draw the correct sprite image for the current direction of the computer fox. You only need to use one static image for each direction, but are free to use all 8 if you'd prefer.</li>
+                <li>Whenever the distance between a computer-controlled fox and the player is <strong>less than 200 pixels</strong>, use <code>tint()</code> to color the computer fox to be blue.</li>
+            </ul>
+            <p><strong>Hint:</strong> To calculate the straight-line (Euclidean) distance, the <code>dist()</code> function is exceedingly useful.</p>
+            <p><em>While not mandatory, creating a class to allow for several ComputerFox objects to be made might simplify this challenge.</em></p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+        }
+
+        function closeModalOnBackdrop(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
