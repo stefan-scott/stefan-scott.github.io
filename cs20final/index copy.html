@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,27 +177,6 @@
             width: 1px !important;
             overflow: hidden !important;
         }
-
-        /* Target styles specifically for embedded reference file content */
-        .ref-section-title {
-            color: #2c3e50;
-            margin-top: 25px;
-            margin-bottom: 8px;
-            font-size: 1.2rem;
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 3px;
-        }
-        
-        .ref-code-block {
-            border-left: 4px solid #3498db;
-            line-height: 1.4;
-            font-size: 0.95rem;
-        }
-
-        .comment {
-            color: #2e7d32;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -218,7 +198,7 @@
         </div>
 
         <h2 class="section-title">2. Python Challenges</h2>
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
             <div class="card">
                 <h3>Password Program</h3>
                 <p>Build a username and password verification script that gives users up to 4 attempts to log in.</p>
@@ -228,11 +208,6 @@
                 <h3>Number Sequence</h3>
                 <p>Create a program that takes an integer and tracks a mathematical step sequence down to 1.</p>
                 <button class="btn" onclick="openModal('modal-sequence')">View Challenge Details</button>
-            </div>
-            <div class="card" style="border-color: #cbd5e0; background-color: #f8fafc;">
-                <h3>Python Reference</h3>
-                <p>Need a quick refresher on syntax? View the core cheat sheet for loops, logic structures, and lists.</p>
-                <button class="btn" onclick="openModal('modal-reference')" style="background-color: #2b6cb0;">Open Reference Sheet</button>
             </div>
         </div>
 
@@ -363,97 +338,6 @@
         </div>
     </div>
 
-    <div id="modal-reference" class="modal" onclick="closeModalOnBackdrop(event)">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('modal-reference')">&times;</span>
-            <h2>Python 3 Quick Reference</h2>
-            
-            <h3 class="ref-section-title">Variables</h3>
-            <pre class="ref-code-block">x = 5
-name = "Alice"
-is_valid = True</pre>
-
-            <h3 class="ref-section-title">Type Conversion (Casting)</h3>
-            <pre class="ref-code-block"><span class="comment"># Convert to integer</span>
-num1 = int("10")    <span class="comment"># 10</span>
-num2 = int(5.7)     <span class="comment"># 5 (truncates decimal)</span>
-
-<span class="comment"># Convert to float</span>
-pi = float("3.14")  <span class="comment"># 3.14</span>
-val = float(8)      <span class="comment"># 8.0</span>
-
-<span class="comment"># Convert to string</span>
-text = str(100)     <span class="comment"># "100"</span></pre>
-
-            <h3 class="ref-section-title">User Input</h3>
-            <pre class="ref-code-block"><span class="comment"># Reads input as a string</span>
-user_text = input("Enter text: ")
-
-<span class="comment"># Converts input to an integer for calculations</span>
-user_number = int(input("Enter a number: "))</pre>
-
-            <h3 class="ref-section-title">Basic Math</h3>
-            <pre class="ref-code-block">addition = 5 + 3
-subtraction = 5 - 3
-multiplication = 5 * 3
-division = 5 / 3       <span class="comment"># Returns float (1.666...)</span>
-floor_division = 5 // 3 <span class="comment"># Returns int (1)</span>
-modulus = 5 % 3        <span class="comment"># Remainder (2)</span>
-exponent = 5 ** 3      <span class="comment"># Power (125)</span></pre>
-
-            <h3 class="ref-section-title">Functions</h3>
-            <pre class="ref-code-block">def my_function(parameter1, parameter2):
-    result = parameter1 + parameter2
-    return result
-
-<span class="comment"># Calling a function</span>
-value = my_function(10, 20)</pre>
-
-            <h3 class="ref-section-title">For Loops</h3>
-            <pre class="ref-code-block"><span class="comment"># Loop from 0 up to (but not including) 5</span>
-for i in range(5):
-    print(i)
-
-<span class="comment"># Loop through list items</span>
-for item in my_list:
-    print(item)</pre>
-
-            <h3 class="ref-section-title">While Loops</h3>
-            <pre class="ref-code-block">count = 0
-while count &lt; 5:
-    print(count)
-    count = count + 1</pre>
-
-            <h3 class="ref-section-title">Lists</h3>
-            <pre class="ref-code-block"><span class="comment"># Create a list</span>
-numbers = [10, 20, 30, 40]
-
-<span class="comment"># Access item (indexing starts at 0)</span>
-first_item = numbers[0]
-
-<span class="comment"># Add item to the end</span>
-numbers.append(50)
-
-<span class="comment"># Get length of list</span>
-total_items = len(numbers)</pre>
-
-            <h3 class="ref-section-title">Slicing (Lists &amp; Strings)</h3>
-            <pre class="ref-code-block"><span class="comment"># syntax -&gt; element[start:stop] (stop index is excluded)</span>
-items = [0, 1, 2, 3, 4, 5]
-text = "Python"
-
-<span class="comment"># Get elements from index 1 up to 4</span>
-sub_list = items[1:4]  <span class="comment"># [1, 2, 3]</span>
-sub_text = text[1:4]   <span class="comment"># "yth"</span>
-
-<span class="comment"># From start up to index 3</span>
-start_to_three = items[:3]  <span class="comment"># [0, 1, 2]</span>
-
-<span class="comment"># From index 2 to the end</span>
-two_to_end = items[2:]  <span class="comment"># [2, 3, 4, 5]</span></pre>
-        </div>
-    </div>
-
     <script>
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'flex';
@@ -474,3 +358,4 @@ two_to_end = items[2:]  <span class="comment"># [2, 3, 4, 5]</span></pre>
     </script>
 </body>
 </html>
+
