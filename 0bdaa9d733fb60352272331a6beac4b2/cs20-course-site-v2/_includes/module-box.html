@@ -1,0 +1,49 @@
+{% assign m = include.module %}
+<section class="module-card{% if m.published == false %} is-draft{% endif %}" id="module-{{ m.module_slug }}">
+  <h2 class="module-card__title">
+    <span class="module-card__index">Module {{ m.module_order }}</span>
+    <span class="module-card__name">{{ m.title }}</span>
+    {% if site.show_unpublished and m.published == false %}<span class="draft-badge">DRAFT</span>{% endif %}
+  </h2>
+  {% assign primary = site.pages | where: "primary_module_slug", m.module_slug | sort: "primary_position" %}
+  {% assign secondary = site.pages | where: "secondary_module_slug", m.module_slug | sort: "secondary_position" %}
+  <ul class="item-list">
+    {% for it in primary %}
+      {% if it.is_divider %}
+        <li class="divider">{{ it.nav_title }}</li>
+      {% elsif site.show_unpublished or it.published != false %}
+        {% assign link_class = "item-link" %}
+        {% if it.redirect_url %}
+          {% if it.external %}{% assign link_class = link_class | append: " item-link--external" %}{% else %}{% assign link_class = link_class | append: " item-link--file" %}{% endif %}
+        {% else %}
+          {% assign link_class = link_class | append: " item-link--page" %}
+        {% endif %}
+        <li>
+          <a class="{{ link_class }}" href="{{ it.redirect_url | default: it.url | relative_url }}" data-title="{{ it.nav_title | default: it.title | escape }}"{% if it.external %} target="_blank" rel="noopener"{% endif %}>{{ it.nav_title | default: it.title }}</a>
+          {% if it.external %}<span class="ext-badge" title="External link">&#8599;</span>{% endif %}
+          {% if it.redirect_url and it.external == false %}<span class="file-badge" title="Downloadable file">&#8681;</span>{% endif %}
+          {% if site.show_unpublished and it.published == false %}<span class="draft-badge">DRAFT</span>{% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% for it in secondary %}
+      {% if site.show_unpublished or it.published != false %}
+        {% assign link_class = "item-link" %}
+        {% if it.redirect_url %}
+          {% if it.external %}{% assign link_class = link_class | append: " item-link--external" %}{% else %}{% assign link_class = link_class | append: " item-link--file" %}{% endif %}
+        {% else %}
+          {% assign link_class = link_class | append: " item-link--page" %}
+        {% endif %}
+        <li>
+          <a class="{{ link_class }}" href="{{ it.redirect_url | default: it.url | relative_url }}" data-title="{{ it.nav_title | default: it.title | escape }}"{% if it.external %} target="_blank" rel="noopener"{% endif %}>{{ it.nav_title | default: it.title }}</a>
+          {% if it.external %}<span class="ext-badge" title="External link">&#8599;</span>{% endif %}
+          {% if it.redirect_url and it.external == false %}<span class="file-badge" title="Downloadable file">&#8681;</span>{% endif %}
+          {% if site.show_unpublished and it.published == false %}<span class="draft-badge">DRAFT</span>{% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% if primary.size == 0 and secondary.size == 0 %}
+  <p class="empty-note">No items in this module.</p>
+  {% endif %}
+</section>

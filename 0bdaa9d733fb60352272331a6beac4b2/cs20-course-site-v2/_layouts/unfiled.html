@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<h1>{{ page.title }}</h1>
+<p>These items exist in the course export but weren't placed in any module.</p>
+<ul class="module-list">
+{% assign orphans = site.pages | where_exp: "p", "p.is_orphan == true" %}
+{% for it in orphans %}
+<li>
+  <a href="{{ it.redirect_url | default: it.url | relative_url }}"{% if it.external %} target="_blank" rel="noopener"{% endif %}>{{ it.nav_title | default: it.title }}</a>{% if it.external %} <em>(external link)</em>{% endif %}
+  {% if site.show_unpublished and it.published == false %}<span class="draft-badge">DRAFT</span>{% endif %}
+</li>
+{% endfor %}
+</ul>

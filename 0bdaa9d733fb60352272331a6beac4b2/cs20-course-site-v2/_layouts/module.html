@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<h1>Module {{ page.module_order }}: {{ page.title }}</h1>
+
+{% assign primary = site.pages | where: "primary_module_slug", page.module_slug | sort: "primary_position" %}
+{% assign secondary = site.pages | where: "secondary_module_slug", page.module_slug | sort: "secondary_position" %}
+
+<ul class="module-list">
+{% for it in primary %}
+  <li{% if it.is_divider %} class="divider"{% endif %}>
+    {% if it.is_divider %}
+      {{ it.nav_title | default: it.title }}
+    {% else %}
+      <a href="{{ it.redirect_url | default: it.url | relative_url }}"{% if it.external %} target="_blank" rel="noopener"{% endif %}>{{ it.nav_title | default: it.title }}</a>{% if it.external %} <em>(external link)</em>{% endif %}
+      {% if site.show_unpublished and it.published == false %}<span class="draft-badge">DRAFT</span>{% endif %}
+    {% endif %}
+  </li>
+{% endfor %}
+{% for it in secondary %}
+  <li>
+    <a href="{{ it.redirect_url | default: it.url | relative_url }}"{% if it.external %} target="_blank" rel="noopener"{% endif %}>{{ it.nav_title | default: it.title }}</a>{% if it.external %} <em>(external link)</em>{% endif %}
+    {% if site.show_unpublished and it.published == false %}<span class="draft-badge">DRAFT</span>{% endif %}
+  </li>
+{% endfor %}
+</ul>
+{% if primary.size == 0 and secondary.size == 0 %}
+<p><em>(No items in this module.)</em></p>
+{% endif %}
