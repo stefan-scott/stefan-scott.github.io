@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circuit Diagrams Archive</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --subtext: #64748b;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      line-height: 1.5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text);
+    }
+
+    /* Day Card Container */
+    .day-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+    }
+
+    .day-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #f1f5f9;
+      color: var(--primary);
+    }
+
+    /* Session Blocks */
+    .session-group {
+      margin-bottom: 1rem;
+    }
+
+    .session-title {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      color: var(--subtext);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Link Buttons */
+    .diagram-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .diagram-btn {
+      background-color: #eff6ff;
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .diagram-btn:hover {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Lightbox Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 8px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+      background: white;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⚡ Camp Circuit Diagrams</h1>
+
+  <!-- MONDAY -->
+  <section class="day-card">
+    <h2 class="day-title">📅 Monday</h2>
+
+    <div class="session-group">
+      <div class="session-title">Morning</div>
+      <ul class="diagram-list">
+        <li>
+          <button class="diagram-btn" onclick="openModal('Day 01 - Demo 01.png')">
+            🔍 Day 01 - Demo 01
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="session-group">
+      <div class="session-title">Afternoon</div>
+      <ul class="diagram-list">
+        <li>
+          <button class="diagram-btn" onclick="openModal('Monday AFternoon - Switch Read.png')">
+            🔍 Switch Read
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="session-group">
+      <div class="session-title">Evening</div>
+      <ul class="diagram-list">
+        <li>
+          <button class="diagram-btn" onclick="openModal('Monday Evening - Potentiometer and Servo.png')">
+            🔍 Potentiometer and Servo
+          </button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TUESDAY -->
+  <section class="day-card">
+    <h2 class="day-title">📅 Tuesday</h2>
+
+    <div class="session-group">
+      <div class="session-title">Morning</div>
+      <ul class="diagram-list">
+        <li>
+          <!-- Note: Verify exact filename for Tuesday if truncated -->
+          <button class="diagram-btn" onclick="openModal('Tuesday Morning - Neopixel and Potentiometer.png')">
+            🔍 Neopixel and Potentiometer
+          </button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Lightbox Popup Overlay -->
+  <div id="imageModal" class="modal-overlay" onclick="closeModal(event)">
+    <button class="close-btn" aria-label="Close image">&times;</button>
+    <img id="modalImage" class="modal-img" src="" alt="Circuit Diagram">
+  </div>
+
+  <script>
+    function openModal(imagePath) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      
+      modalImg.src = imagePath;
+      modal.classList.add('active');
+    }
+
+    function closeModal(event) {
+      // Closes if clicking background, close button, or pressing escape
+      const modal = document.getElementById('imageModal');
+      if (
+        event.target === modal || 
+        event.target.classList.contains('close-btn') || 
+        event.key === 'Escape'
+      ) {
+        modal.classList.remove('active');
+        document.getElementById('modalImage').src = '';
+      }
+    }
+
+    // Escape key listener for accessibility
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal(e);
+    });
+  </script>
+
+</body>
+</html>

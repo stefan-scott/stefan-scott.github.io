@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course Structure Admin</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="admin-header">
+  <h1>Course Structure Admin</h1>
+  <div class="admin-actions">
+    <span id="status" class="status"></span>
+    <button id="btn-reload" class="btn btn--ghost" type="button">Reload</button>
+    <button id="btn-save" class="btn" type="button">Save changes</button>
+    <button id="btn-publish" class="btn btn--primary" type="button">Save &amp; Publish to GitHub</button>
+  </div>
+</header>
+<p class="hint">
+  Drag items to reorder within a module, or drag them into a different module (or into
+  <strong>Unfiled</strong> to remove from all modules). Use the switches to publish or unpublish.
+  Nothing touches disk until you click a Save button, and nothing reaches GitHub until you click
+  <strong>Save &amp; Publish</strong>.
+</p>
+<div id="board" class="board">
+  <p class="loading">Loading course structure&hellip;</p>
+</div>
+<pre id="log" class="log" hidden></pre>
+<script src="admin.js"></script>
+</body>
+</html>

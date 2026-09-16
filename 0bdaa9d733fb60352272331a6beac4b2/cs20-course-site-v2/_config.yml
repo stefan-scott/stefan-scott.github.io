@@ -1,0 +1,27 @@
+title: "CS20 2025-26 T2 P2"
+description: "Course site generated from a Canvas course export"
+markdown: kramdown
+
+# Set to true only for a local draft-preview build; leave false for the real
+# published site (this only controls whether DRAFT badges are drawn -- items
+# with published: false are never actually built regardless of this setting
+# unless you also pass --unpublished to jekyll serve/build).
+show_unpublished: false
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-default-layout
+  - jekyll-titles-from-headings
+
+relative_links:
+  enabled: true
+  collections: true
+
+include:
+  - "*.md"
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

@@ -1,0 +1,22 @@
+source "https://rubygems.org"
+
+# NOTE: this uses plain modern Jekyll for LOCAL PREVIEW convenience, not the
+# "github-pages" gem. That's intentional: github-pages pins a very old
+# Jekyll (3.9) + Liquid combo that crashes on modern Ruby (3.2+) with errors
+# like "undefined method 'tainted?'" -- a Ruby-vs-ancient-gem incompatibility,
+# not something fixable in this project's files.
+#
+# This does NOT affect your deployed site. GitHub Pages builds the live site
+# on its own servers with its own pinned environment, completely independent
+# of this Gemfile. This Gemfile only matters if you run `jekyll serve`
+# locally to preview before pushing.
+gem "jekyll", "~> 4.3"
+
+group :jekyll_plugins do
+  gem "jekyll-relative-links"
+  gem "jekyll-optional-front-matter"
+  gem "jekyll-default-layout"
+  gem "jekyll-titles-from-headings"
+end
+
+

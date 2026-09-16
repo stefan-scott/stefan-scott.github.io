@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<h1>{{ page.title }}</h1>
+<p>This site was generated from a Canvas course export.</p>
+<h2>Modules</h2>
+<ul class="module-list">
+{% assign mods = site.pages | where_exp: "p", "p.layout == 'module'" | sort: "module_order" %}
+{% for m in mods %}
+<li>
+  <a href="{{ m.url | relative_url }}">{{ m.title }}</a>
+  {% if site.show_unpublished and m.published == false %}<span class="draft-badge">DRAFT</span>{% endif %}
+</li>
+{% endfor %}
+</ul>
+{% assign unfiled = site.pages | where_exp: "p", "p.layout == 'unfiled'" | first %}
+{% if unfiled %}<p><a href="{{ unfiled.url | relative_url }}">Unfiled items</a> (not part of any module)</p>{% endif %}

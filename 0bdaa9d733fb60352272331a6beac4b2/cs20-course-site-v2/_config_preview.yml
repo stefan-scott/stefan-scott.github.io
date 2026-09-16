@@ -1,0 +1,15 @@
+# Draft-preview override config. Use together with the --unpublished flag:
+#
+#   bundle exec jekyll serve --unpublished --config _config.yml,_config_preview.yml
+#
+# This does two things:
+#   1. --unpublished tells Jekyll to actually build pages marked published: false
+#      (normally Jekyll silently skips them -- this is what keeps them off the
+#      real published site).
+#   2. show_unpublished: true turns on the "DRAFT" badge next to those items
+#      in module listings, so you can tell at a glance what's still hidden.
+#
+# Never deploy with this config -- it's for local review only. The GitHub
+# Pages build always uses plain _config.yml, which keeps unpublished content
+# out of the build entirely.
+show_unpublished: true

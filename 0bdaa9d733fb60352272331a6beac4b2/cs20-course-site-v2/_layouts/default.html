@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }}{% if page.title != site.title %} · {{ site.title }}{% endif %}</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1.5rem; line-height: 1.55; color: #1a1a1a; }
+a { color: #0645ad; }
+nav.crumb { font-size: 0.85rem; margin-bottom: 1.5rem; color: #666; }
+img { max-width: 100%; }
+pre { background: #f4f4f4; padding: 0.75rem; overflow-x: auto; }
+code { background: #f4f4f4; padding: 0.1rem 0.3rem; border-radius: 3px; }
+hr { border: none; border-top: 1px solid #ddd; margin: 2rem 0; }
+ul.module-list li { margin: 0.35rem 0; }
+li.divider { list-style: none; margin-left: -1.2rem; font-weight: 600; color: #555; margin-top: 1.2rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.03em; }
+.draft-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; color: #a15c00; background: #fff3cd; border: 1px solid #ffe08a; border-radius: 3px; padding: 0 0.35rem; margin-left: 0.4rem; vertical-align: middle; }
+</style>
+</head>
+<body>
+<nav class="crumb"><a href="{{ '/' | relative_url }}">Home</a></nav>
+{{ content }}
+</body>
+</html>
