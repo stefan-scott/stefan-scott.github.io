@@ -1,0 +1,41 @@
+/*
+  Radio Receiver Starter Code
+
+
+
+  Adapted from tutorial:
+      www.HowToMechatronics.com
+      Library: TMRh20/RF24, https://github.com/tmrh20/RF24/
+*/
+
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+RF24 radio(7, 8); // CE, CSN
+
+const byte address[6] = "robot";
+void setup() {
+  Serial.begin(9600);
+  radio.begin();
+  radio.openReadingPipe(0, address);
+  radio.setPALevel(RF24_PA_MAX);
+  radio.startListening();
+  Serial.println("Starting to listen...");
+}
+
+void readRadio()
+{ // This method will be used to check for messages. If there is a new message, 
+  // update some variables to reflect what action we should be taking next.
+  if (radio.available()) {
+    char text[4] = "";      //sized for our anticipated msg, 
+                    //        but can have extra room if that makes more sense
+    radio.read(&text, sizeof(text));
+    Serial.println(text);
+
+  }
+}
+
+
+void loop() {
+  readRadio();
+}
