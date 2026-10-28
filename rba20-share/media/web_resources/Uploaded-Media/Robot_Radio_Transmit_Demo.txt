@@ -1,0 +1,75 @@
+/*
+ * 
+*
+* Adapted from original tutorial:               
+*    Dejan Nedelkovski, www.HowToMechatronics.com
+*    Library: TMRh20/RF24, https://github.com/tmrh20/RF24/
+*/
+
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+RF24 radio(7, 8); // CE, CSN
+const byte address[6] = "robot";    //pick a unique address, any 5-char string
+
+void setup() {
+  Serial.begin(9600);
+  radio.begin();
+  radio.openWritingPipe(address);  
+  radio.setPALevel(RF24_PA_MAX);   //if modules are very close, use RF24_PA_MIN
+  radio.stopListening();           //sets module in TRANSMISSION mode
+}
+void loop() {
+
+  // Message Scheme:
+  // "----" 4 characters, representing possible motions:
+  // "0001" → driving forward 
+  // "0010" → driving backward
+  // "0100" → pivot left
+  // "1000" → pivot right
+  // "0000" → brake
+  //                         This is very simple - no way to communicate speed desired
+
+
+  // broadcast a set of driving instructions.
+  const char forwardText[] = "0001";  //FORWARD
+  Serial.println("msg: fwd");
+  for(int i = 0; i < 10; i++)
+  {
+    radio.write(&forwardText, sizeof(forwardText));   // send this instruction 10 times
+    delay(100);                          // for a controller, want to regularly send
+  }                                     // current instruction.
+    
+  delay(1000);  //1 sec between actions
+  
+  const char leftText[] = "0100";  //LEFT
+  Serial.println("msg: left");
+  for(int i = 0; i < 10; i++)
+  {
+    radio.write(&leftText, sizeof(leftText));   // send this instruction 10 times
+    delay(100);                         
+  }   
+  
+  delay(1000);   //1 sec between actions
+ 
+
+  const char backwardTextxt[] = "0010";  //BACKWARD
+  Serial.println("msg: bwd");
+  for(int i = 0; i < 10; i++)
+  {
+    radio.write(&backwardTextxt, sizeof(backwardTextxt));   // send this instruction 10 times
+    delay(100);                         
+  }   
+  
+  delay(1000);   //1 sec between actions
+
+    const char rightText[] = "1000";  //RIGHT
+    Serial.println("msg: right");
+  for(int i = 0; i < 10; i++)
+  {
+    radio.write(&rightText, sizeof(rightText));   // send this instruction 10 times
+    delay(100);                         
+  }   
+  
+  delay(1000);   //1 sec between actions
+}
